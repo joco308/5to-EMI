@@ -1,21 +1,77 @@
-# Sistemas de Informacion
-## Que es
-## tipos de Sistemas
+# Ingenieria de sistemas
+## Teoria general de sistemas
+## Pensamiento sistemico
+    a) Es una teoria generalista que ofrese una vision unitaria del mundo
+    b) Teoria para modelar objetos naturales o simples y complejos
 
-### Impementacion de sistema de informacion
-Se implementa cuando hay una necesidad, cuando nececite generar algun tipo de control.
+Se usa el analisis y sintesis, sintesis es el poroceso de poner juntas las cosas y el analisis permite observar dentro las cosas.  
 
-Etapas criticas:
-- **Adopcion.-** Evalucion de necesidades y beneficios
-- **Seleccion.-** Elegir la solucion tecnica adecuada
-- **Gestion del cambio.-** Formacion y comunicacion a los usuarios
+En resumen analisis es dividir inspeccionar y sintesis es unir.
 
-### Seguridad de la informacion
-Aplicar las tecnicas necesarias para proteger dicha informacion.
-- **Activo valioso.-** Protejer los datos
-- **Cumplimiento.-** Seguir las normativas de la institucion a que normas se rije 
-- **Seguridad integral.-** 
+# Concepto de sistema
+Un sistema es un conjunto de elementos que interactuan entre si para cumplir un fin en comun.  
 
-# Concluciones
-Tenemos que ver que el sistema de informacion a que apunta cuan es su objetivo, requiere una administracion cordinada entre direccion y gestion, la tecnologia que acompañe depende del tiempo de actualizacion, acordes a la demanda de la organizacion
+## Clasificacion de sitemas
+
+- **Segun su naturaleza**
+    - Sistemas fisicos concretos
+    - Sistemas abstractos
+- **Segun su relacion con el entrono**
+    - Sistemas abiertos
+    - Sistemas cerrados
+- **Segun su complejidad**
+    - Simples
+    - Complejos
+
+## ??? sistemas
+
+### Totalidad
+Todo sistema se analiza como un todo no puede estar olvidado un componente es un todo.
+
+### Sinergia 
+Cada componente se relaciona con otro y se tiene que analizar esas relaciones
+
+### Retro alimentacion
+Los sistemas reciben informacion del exterior
+
+### Equifinad
+Un mismo resultado puede alcanzarse por diferentes caminos
+
+### Jerarquia
+los sistemas estan compuestos por sub sistemas
+
+- **Suprasistema** es el sistema mayor por el que empieza
+
+- **Subsistema** es un sistema que esta dentro del *suprasistema*
+
+## Caracteristicas de los sistemas
+- Totalidad
+- Independencia- 
+- Proposito o objetivo- 
+- adaptabilidad ( capaz de - exolucionar dinamicamente )
+- Estabilidad y cambio ( los cambios se tienen que controlar y darle estabilidad )
+- Frontera o limite 
+- Ambiente o entorno
+
+# Aspectos Estructurales y funcionales
+Todo sistema tiene estas 2 partes, estructiral es el como esta estructirado los elementos del sistema y fincional es el como funciona es sistema como tal
+
+## Dinamica de los sistemas
+Es como la estructura determina el comportamiento, osea como varia en funcion al tiempo 
+
+## Aspectos estructurales
+
+- Elementos o componentes
+- Relaciones entre elementos
+- Canales de flujo o redes de comunicacion
+- Depositos ( donde se va a almacenar la informacion )
+- Limites ( hasta donde va a ser nuestro sistema )
+
+Son los componentes del sistema
+
+
+
+### Metodo
+### Hrramienta 
+
 
