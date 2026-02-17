@@ -18,9 +18,11 @@
 ### Capa Fisica 
 Los elementos de insfrestructura todo lo fisico, cada elemento tiene que estar a una temperatura o margenes operativos para su correcto funcionamiento.  
 
-La capa fisica transmite bits(frecuencias o pulzos electricos), si existe un problema en la red puede que sea la fisica.  
+La capa fisica transmite bits(frecuencias o pulzos electricos), si existe un problema en la red puede que sea la capa fisica.  
 
+Tiene que tener buena refrigeracion para su correcto funcionamiento en el caso de servidores y los cables en buen estado.
 
+### 
 
 
 
