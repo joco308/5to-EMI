@@ -144,7 +144,31 @@ la informacion y los analizis y estadisticas vienen de tablas relacionales
 
 ## ADO
 
+# Un data center por dentro
 
+Un data enter cuenta con un sitema de gestion de respaldo de energia, hace que nunca pare aunque se corte la energia. Tienen autonomia y un cierto timpo de vida lo minimo es de 30 min, para hacer respaldos o usar protocolos para apagado del servidor.
+
+Sistemas de climatzacion un data center tine uqe estar bien refrigerados con dstintos metodos ya que los componentes necesitan estar refrigerados para no dañarse.
+
+Seguridad fisica, nadie ingre a toda la insfrecstructura sin autorizacion, y en el caso que haya hay un protocolo de ingreso
+
+<Servidor de coneccion remoto EXPONER>
+
+Existen 3 tipos de hambientes:
+- **Area de energia** donde estan los respaldos de energia, alimenta a los IDF y MDF
+- **Area de comunicaciones** donde estan todas las conexciones de la institucion la maprte mas importante, comunica al datacenter con el usuario *MDF* Main distribution frame
+
+<investigar IDF MDF>
+
+- **Area de servidores** Deben ser seguros y no dejar pasar a cualquiera asi por asi, tiene que estar bien refrigerados.
+
+---
+
+la difernecia entre gestor de base de datos y un administrador de  base de datos es que un gestor solo administra ingormacion y el administrador hace mejoras en los sistemas optimiza, y siempre monitoriea la base de datos.
+
+# Manipulacion de datos
+
+Un dataset es una tabla procesada, un data set se puede generar por una consulta
 
 
 

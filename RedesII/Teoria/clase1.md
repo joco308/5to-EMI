@@ -22,6 +22,10 @@ La capa fisica transmite bits(frecuencias o pulzos electricos), si existe un pro
 
 Tiene que tener buena refrigeracion para su correcto funcionamiento en el caso de servidores y los cables en buen estado.
 
+<La norma que rige colores de los cables UTP>
+
+
+
 ### 
 
 
