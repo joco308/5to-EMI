@@ -170,9 +170,32 @@ la difernecia entre gestor de base de datos y un administrador de  base de datos
 
 Un dataset es una tabla procesada, un data set se puede generar por una consulta
 
+# Componentes de SQL
 
+### Comandos:
+- DDL
+    - CREATE
+    - DROP
+    - ALTER
 
+- DML
+    - INSERT
+    - UPDATE
+    - DELATE
+    - SELECT
 
+<que es un predicado>
+
+- DCL
+    - REVOKE
+    - GARANT
+    - DENY
+
+- TCL
+    - COMMIT
+    - ROLBACK
+    - SAVEPOINT
+    - SET TRANSACTION
 
 
 
