@@ -54,7 +54,46 @@ autor muller
 - Mantenimiento
 
 ## modelo de construccion de prototipos
+
+Busca recolectar atrabaes de un prototipo los requerimientos del sistema, costiste que le presentes un prototipo propio o no propio al cliente para que identifique lo que quiere.
+
+etapas clasica:
+
+
+
+tiene un siclo:
+
+- Comunicacion
+- Plan rapido
+- Modelado diseño rapido
+- Construccion del Prototipo
+- Desarrollo entrega retroalimentacion
+
+## Modelo de desarrollo rapido de aplicaciones DRA
+
+se separa por equipos, y trabajan de manera simultanea, se necesita dividir en parte para distribuir a los equipos, basado en lineal secuencial
+
 ## modelo evolutivos
+
+### Modelo incremental 
+
+va avanzndo por incrementos cada infremento tiene analisis, diseño, codigo y pruebas, un incremento es como una iteracion, cada incremento es un avance osea agrefa funcionalidades o mejoras de sistema
+
+### Modelo Espiral
+
+- comunicacion con el cliente
+- planificacion
+- Analizis de riezgos 
+- ingenieria
+- construccion y adptacion
+- evaluacion del criterio
+
+cada vuelta es una iteracion
+
+### Espira WINWIN (gana y gana)
+
+toma las bases del modelo espurar pero hacemos enfacis en la comunicacion con el cliente, el objetivo es que ambas partes ganen clientes y desarrolladores
+s
 
 
 
