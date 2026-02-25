@@ -56,11 +56,182 @@ Los datos por si solos no representan nada.
 
 ### 1.2 Administracion de datos
 
-**Normalizacion** para exitar la redundancia de datos  *investigar*
+**Normalizacion** para evitar la redundancia de datos es su principal objetivo y que haya coerencia de datos.
+
+- **1FN** atomicidad qye en un campo no haya mas de un dato ej telefo que alguien no tenga en una fila no tenga 2 telefonos
+
+- **2FN**  todas las columnas que no son llaves deben depender de una llave primaria, las que no tengan que ver con la llave primaria tienen que llevarse a otra tabla
+
+- **3FN** si un dato depende de otro que no es una llave primaria pues deben separarse
+
+## Ejericios:
+
+### Ejericio 1:
+
+| ID_Inscripcion | Nombre_Alumno | Email_Alumno | Curso | Instructor | Precio_Curso |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | Carlos Perez | carlos@mail.com | SQL Básico | Profe Juan | 50 USD |
+| 2 | Carlos Perez | carlos@mail.com | Python 101 | Profe Ana | 60 USD |
+| 3 | Marta Ruiz | marta@mail.com | SQL Básico | Profe Juan | 50 USD |
+| 4 | Carlos Perez | carlos@mail.com | Power BI | Profe Luis | 70 USD |
+
+<br>
+
+**Tabla alumnos**
+|ID_Alumno(PK)|Nombre_Alumno|Email_Alumno|
+|:--:|:--:|:--:|
+|1|Carlos Perez|carlos@mail.com|
+|2|Marta Ruiz|marta@mail.com|
+
+<br>
+
+**Tabla profesores**
+|ID_Profesor(PK)|Nombre_profesor|
+|:--:|:--:|
+|1|Profe juan|
+|2|Profe Ana|
+|3|profe luis|
+
+<br>
+
+**Tabla profesores**
+|ID_curso(PK)|Nombre_curso|ID_Profesor(FK)|Precio|
+|:--:|:--:|:--:|:--:|
+|1|SQL basico|1|50 USD|
+|2|Python 101|1|60 USD|
+|3|Power Bl|3|70 USD|
+
+<br>
+
+**Tabla inscripcion**
+|ID_Inscripcion(PK)|ID_Alumno(FK)|ID_curso(FK)|
+|:--:|:--:|:--:|
+|1|1|1|
+|2|1|2|
+|3|2|1|
+|4|1|3|
+
+
+
+### Ejercicio 2:
+
+| ID_Venta | Cliente | Ciudad_Cliente | Producto | Categoria | Cantidad | Precio_Unitario | Fecha_Venta |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 501 | Ana Ramos | Madrid | Mouse Logi | Accesorios | 2 | 25.00 | 2024-01-10 |
+| 501 | Ana Ramos | Madrid | Teclado Mec | Accesorios | 1 | 80.00 | 2024-01-10 |
+| 502 | Luis Paez | Bogotá | Mouse Logi | Accesorios | 1 | 25.00 | 2024-01-11 |
+| 503 | Ana Ramos | Madrid | Monitor 4K | Pantallas | 1 | 400.00 | 2024-01-12 |
+
+<br>
+
+**Tabla ciudad**
+|id_ciudad(PK)|ciudad|
+|:--:|:--:|
+|1|Madrid|
+|2|Bogota|
+
+<br>
+
+**Tabla cliente**
+|id_cliente(PK)|nombre_cliente|id_ciudad(FK)|
+|:--:|:--:|:--:|
+|1|Ana Ramos|1|
+|2|Luis Perez|2|
+
+<br>
+
+**Tabla categoria**
+|id_categoria(PK)|categoria|
+|:--:|:--:|
+|1|Accesosrios|
+|2|Pantallas|
+
+<br>
+
+**Tabla producto**
+|id_producto(PK)|producto|id_categoria(FK)|precio|
+|:--:|:--:|:--:|:--:|
+|1|Mouse Logi|1|	25.00|
+|2|Teclado Mec|1|	80.00|
+|3|	Monitor 4K|2|400.00|
+
+<br>
+
+**Tabla de ventas**
+|id_venta(PK)|id_clliente(FK)|fecha_venta(PK)|
+|:--:|:--:|:--:|
+|501|1|2024-01-10|
+|502|2|2024-01-10|
+|503|1|2024-01-11|
+
+<br>
+
+**Venta**
+|id_venta(FK)|id_producto(FK)|cantidad|
+|:--:|:--:|:--:|
+|501|1|2|
+|501|2|1|
+|502|1|1|
+|503|3|1|
+
+### Ejericio 3:
+
+| ID_Cita | Paciente | Telefono_Pac | Medico | Especialidad | Consultorio | Fecha_Cita | Hora | Costo | Estado_Pago |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 101 | Juan Soler | 555-123 | Dr. Casas | Cardiología | A-10 | 2024-05-10 | 09:00 | 100 | Pendiente |
+| 102 | Ana Ruiz | 555-789 | Dra. Vega | Pediatría | B-05 | 2024-05-10 | 10:00 | 80 | Pagado |
+| 103 | Juan Soler | 555-123 | Dra. Vega | Pediatría | B-05 | 2024-05-11 | 11:00 | 80 | Pagado |
+| 104 | Luis Toro | 555-444 | Dr. Casas | Cardiología | A-10 | 2024-05-12 | 09:00 | 100 | Pendiente |
+
+<br>
+
+**Tabla paciente**
+|id_paciente(PK)|paciente|telefono|
+|:--:|:--:|:--:|
+|1|Juan Soler|555-123
+|2|Ana Ruiz|555-789
+|3|Luis Toro|555-444
+
+<br>
+
+**Tabla especialidades**
+|id_especialidad(PK)|especialidad|
+|:--:|:--:|
+|1|Cardiologia
+|2|Pediatria|
+
+<br>
+
+**Talba consultorios**
+|id_consultorio(PK)|consultorio|
+|:--:|:--:|
+|1|A-10|
+|2|B-05|
+
+<br>
+
+**Tabla medicos**
+|id-medico(PK)|nombre|id_especialidad(FK)|id_consultorio(FK)|costo|
+|:--:|:--:|:--:|:--:|:--:|
+|1|Dr. Casas|1|1|100|
+|2|Dra. Vega|2|2|80|
+
+<br>
+
+**Tabla citas**
+|id-cita(PK)|id_paciente(FK)|id_medico(FK)|fecha|hora|estado de pago|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|101|1|1|2024-05-10|09:00|Pendiente|
+|102|2|2|2024-05-10|10:00|Pagado|
+|103|1|2|2024-05-11	|11:00|Pagado
+|104|3|1|2024-05-12	|09:00|Pendiante|
+
+---
 
 ## tipos de llaves (key)
 
 - **llave primaria - llave primaria compuesta** la primaria es el identificador unico, y la primaria compuesta utilizas 2 columnas para identificar algo
+
 - **llave Foranea** la union de las tablas es la referencia la primary key en otra tabla  
 
 # Tipos de tablas
@@ -196,6 +367,9 @@ Un dataset es una tabla procesada, un data set se puede generar por una consulta
     - ROLBACK
     - SAVEPOINT
     - SET TRANSACTION
+
+
+
 
 
 
