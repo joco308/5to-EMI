@@ -1,5 +1,14 @@
 # Sistemas de Informacion
 ## Que es
+
+Es una manera estrategica de como guardad y generar estrategias con datos, no solamente es un programa, es un sitema que se basa en 4 principales elementos:
+
+- **Personas.-** Aquellas que utilizan y gestionan los datos
+- **Procedimientos.-** Son las normas y las reglas de como se manipularan esos datos
+- **Datos.-** Son la materia prima los datos como tal
+- **Recursos** es todo el hardware y la tecnologia que tenemos para ese sistema
+
+
 ## tipos de Sistemas
 
 ### Impementacion de sistema de informacion
