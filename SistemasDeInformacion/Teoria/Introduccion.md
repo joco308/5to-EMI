@@ -1,4 +1,7 @@
 # Sistemas de Informacion
+
+No solamante almacenan datos es un conjunto de elementos que permiten darle utilidad a esos datos.
+
 ## Que es
 
 Es una manera estrategica de como guardad y generar estrategias con datos, no solamente es un programa, es un sitema que se basa en 4 principales elementos:
@@ -8,10 +11,47 @@ Es una manera estrategica de como guardad y generar estrategias con datos, no so
 - **Datos.-** Son la materia prima los datos como tal
 - **Recursos** es todo el hardware y la tecnologia que tenemos para ese sistema
 
+## Fundamenteos de la informacion
+
+### Dato
+
+es la unidad basica de informacion por si sola no tiene significado
+
+### Informacion
+
+Es el dato con contexto nos sirve para darle un contexto al dato ya que por si solo no significa nada
+
+### Conosismiento
+
+es utilizar la informacion para tomar deciciones
+
+---
+
+### Propiedades de la informacion de calidad
+
+La informacion tiene que cumplir ciertos criterios para que la informacion sea buena y nos permita tomar deciciones
+
+- **significado** que se entienda que puedes entender
+- **vigencia** que este calido al dia que lo vez
+- **Valides** que sea real y coerente
+- **valor** que te quite una duda y ayude a tomar deciciones
+
+---
+
+## Cadena de valor 
+
+![cadena de valor](cadena_de_valor.png)
+
+- **Actividades Primarias** es lo mas importante es lo que hace que el producto sa haga y salga a la venta 
+
+- **Actividades Secundarias** la logistica para que funcionen las actividades primarias
+
+---
 
 ## tipos de Sistemas
 
 ### Impementacion de sistema de informacion
+
 Se implementa cuando hay una necesidad, cuando nececite generar algun tipo de control.
 
 Etapas criticas:
