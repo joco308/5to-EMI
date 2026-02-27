@@ -17,4 +17,20 @@ Un algpritmo es una susecion de instrucciones para solucionar un problema, es un
 
 
 ## Busqueda lineal
+
 Busca todos los elementos manera secuancial, el peor caso es u numero elevado
+
+## Busqueda binaria
+
+Busca arrays ordenadas, va dividiendo y dividiendo hasta encontrar el numero
+
+el peor caso es que no este ordenado los datos
+
+## Ordenamiento burbuja
+
+Va comparado dato por dato y se intercambia 
+
+## ordenamiento por meszcla
+
+es un algoritmo que divide por partes, primero divide una lista en partes iguales y van allegar al punto de nere 1 elemnto o 0 elementos y los va ordenando
+
