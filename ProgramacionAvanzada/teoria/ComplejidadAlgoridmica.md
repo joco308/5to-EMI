@@ -1,6 +1,25 @@
 # Complejidad ALgoridmica
 
-Consiste en comprender el crecimiento de recurso que necesita un algoridmo para procesar cierta cantidad de datos, para esto utilizaremos una notacion conocida como BIG-O
+Consiste en comprender el crecimiento de recurso que necesita un algoridmo para procesar cierta cantidad de datos, para esto utilizaremos una notacion Big-O para esto analizaremos 2 recursos:
+
+- **Tiempo** cuanto tarda en ejecutarce
+- **Espacio** cuanto espacio ocupa
+
+para eso utilizaremos Big-O y para sacar esa complejidad tenemos 2 formas:
+
+### Analisis Asintotico
+
+es generando un grafico con distintas entradas para ver como se comporta su grafica y asi sacar su complejidad utilizando asintotas( Asintota vertical horizontal y oblicuas ), con distintos tamaños de $n$.
+
+misntras la asintota sea mas vetrtical se necesistaran mas recursos para ejecutar el algoritmo, aqui las zonas que tenemos que evitar y las donde esta bien tener la asintota:
+
+![Big-O zonas](./src/Big-O.png)
+
+### analisis teorico
+
+es ver el codigo y analizarlo por ejemplo cada ejecucion es una accion y pára esto hay que ver si hay bucles si hay condicionales etc
+
+hay distintas complejidadeas algoridmicas soin las siguientes:
 
 - O(1) constante
 - O(log n) Logaridmica
@@ -10,7 +29,7 @@ Consiste en comprender el crecimiento de recurso que necesita un algoridmo para 
 
 ## Algoritmo
 
-Un algpritmo es una susecion de instrucciones para solucionar un problema, es una estructura que mediante datos de entrada procesamos esos datos y generamos datos de salida.
+Un algritmo es una susecion de instrucciones para solucionar un problema, es una estructura que mediante datos de entrada procesamos esos datos y generamos datos de salida.
 
     Nosotros necesitamos escoger un algordimo optimo y para eso lo analizamos con conplejidad algoridmica para medir su complejidad espacial y temporal
 
