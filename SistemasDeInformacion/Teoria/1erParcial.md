@@ -142,7 +142,38 @@ cada vuelta es una iteracion
 ### Espira WINWIN (gana y gana)
 
 toma las bases del modelo espurar pero hacemos enfacis en la comunicacion con el cliente, el objetivo es que ambas partes ganen clientes y desarrolladores
-s
 
+<estudiar lo que falta libro ingenieria de sistemas hasta el cap 3>
 
+# Capitulo 3
 
+Este capitulo habla sobre los roles de un sistema de informacion, y que no solamente es software y hardware sino que es una convivencia entre distiendos roles para que este funcione.
+
+abarca los siguientes roles:
+
+- Usuarios
+- Analista de sistemas
+- Diseñadores de sisetmas
+- Administrador o generencia
+- Auditores, personal de control de calidad
+- Programadores
+- Personal de operaciones
+
+## Analista de sistemas
+
+- **Arqueologo** saber que informacion almacenar, busca los requerimientos y investiga que se necesita 
+- **inovador** busca nuevas ideas para proponer una solucion, que inove en propuestas
+- **Mediador** 
+- **Lider** tienes distintas caracteristicas de lider sabe liderar y es multidiciplinario y sabe expreserse en publico con facilidad
+
+## Diseñador de sistemas
+
+no trabaja directamente con los usuarios sabe mucho sobre datos tecnicos es el que ve el "COMO" tiene un nivel de abstraccion elevado, genera los panos tecnicos del sistema
+
+## Programador
+
+es el que traduce el diceño el plano tecnico del sistema a codigo y lo lleva a acabo, corregir errores
+
+## Personal de operaciones 
+
+Son los que mantienen vivo el sistema, ven que la parte fisica pueda mantener el sistema

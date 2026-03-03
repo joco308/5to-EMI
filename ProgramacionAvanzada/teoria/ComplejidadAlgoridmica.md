@@ -53,3 +53,16 @@ Va comparado dato por dato y se intercambia
 
 es un algoritmo que divide por partes, primero divide una lista en partes iguales y van allegar al punto de nere 1 elemnto o 0 elementos y los va ordenando
 
+## Ejericio
+
+un avion ercules tranculaba dinero trasn el accidente se recuperaron multiples cajas con codigos de identificacion, cada caja tiene lo siguiente:
+
+- codigo
+- monto transportado
+- prioridad de traslado
+- estado de recuperacion
+
+el equipo tecnico debe ordenar registros rapidamente debe analizar eficioncia debe tomar deciciones bajo restricciones de timpo y memoria
+
+el sistema debe ordenar continuamente mientras llegan nuevos datos se tienen 200000 registros, memoria limitada tiempo critico se pide simular una entrada incremental comparar quick sort in place y marge sort tradicional
+medir uso de memoria
