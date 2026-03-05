@@ -177,3 +177,31 @@ es el que traduce el diceño el plano tecnico del sistema a codigo y lo lleva a 
 ## Personal de operaciones 
 
 Son los que mantienen vivo el sistema, ven que la parte fisica pueda mantener el sistema
+
+<otro autor lo mismo--- esto otro autor>
+
+## El Desafios
+
+- Trabajar en equipo para resolver problemas
+- El cliente quede feliz
+
+## Proceso de sorftware
+
+### Instrucciones para desarrollar una aplicacion
+
+como descubrior que tiene que hacer la aplpicacion
+como decidir como va a estar estructurada la aplicacion
+
+## Proceso unificado rational
+
+<metodologia ru>
+
+## Que atributo tiene un buen software
+
+- **mantenible** -> en el tiempo deve evolucionar decuardo a los cambios
+- **confiable** -> que el proceso y los resotados sean correctos
+- **eficioente** -> no algastar recursos en  un tiempo minimo
+- **usable** -> facil de usar
+
+<introduccion a sistemas de informacion
+faces tablas de cada modelo>
