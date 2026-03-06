@@ -363,10 +363,46 @@ Un dataset es una tabla procesada, un data set se puede generar por una consulta
     - DENY
 
 - TCL
-    - COMMIT
+    - COMMIT (examen)
     - ROLBACK
     - SAVEPOINT
     - SET TRANSACTION
+
+index <examen investigar ojo aqui> 
+
+## Pista de Auditoria (log)
+
+### log de sistema
+
+### log de aplicacion
+
+registta los eventos importantes dentro de un programa, errores, etc
+
+## Storge 
+
+es un arreglo de discos duros, que esta conectado a distintos servidores de aplicaciones dentro de un data center.
+
+es el almacenamiento de un datacenter donde todos los servidores se conectan porque un servidor solo es de procesamiento de datos y almacenamiento se encarga el storge
+
+## MV
+
+tipos virtualizacion :
+- tipo 1 ...
+- tipo 2 ...
+
+### Mvware
+se pueden enlazar
+### VCENTER
+
+### virtualizacion logico
+### virtualizacion de fierro(nivel harware)
+
+### citrix
+
+### proxmox
+
+### hyperView
+- altair hayperview 
 
 
 
