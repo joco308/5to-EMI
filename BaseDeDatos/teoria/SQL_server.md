@@ -1,6 +1,6 @@
 # SQL server
 
-Es un sistema de gestion de base de datos relacionales eso significa que trabaja con tablas que se conectan entre si.
+Es un sistema de gestor de base de datos relacionales eso significa que trabaja con tablas que se conectan entre si.
 
 - **DDL ( Data Definicion language )** 
     - CREATE
@@ -31,6 +31,43 @@ Postgress -> PSQL
 
 # Gobierno de datos
 
+Es un sistema que rige como se manejas los datos en una prganizacion quien tiene acceso a ellos como se almacenan y que los datos sean claros y corectos
+
+Para saber si se esta hacienod un buen gobierno de datos se le pone una nota
+
+## Roles
+
+- **Data owner** el dueño de los datos decide quien y como se ven los datos
+- **Data steward** es el que se asegura que se haga lo que el owner pide mas que todo se encarga de cuidar los datos
+- **Data custodian(DBA)** el administrador de base de datos el que cuida la base de datos el que administra y protege
+
+- Calidad de datos
+- Seguridad de datos
+- Complimineto normativo
+- Roles y responsabilidad
+    - Usuario -> Rol -> Privilegio
+    
+## Dimensiones de calida (KPIs)
+
+el steward se fija en estas reglas para ponerle una nota a los datos
+
+- **Exactitud** que los datos sean exactos que digan la verdad
+- **Completitut** que datos faltan
+- **Consistencia** que el dato sea el mismo en todos lados
+- **Oportunidad** el dato llega a tiempo para tomar deciciones
+
+## Modelo de marudez
+
+Existen niveles para saber como va el gobiurno de datos
+
+- Nivel 1 -> caos, no hay reglas ni nada
+- Nivel 2 -> ya estan definidos los roles
+- Nivel 3 -> automatizacion el sistema ya sabe cuando hay problemas y lo avisa al responsable
+- Nivel 4 -> la empresa predice errores antes de que pasen
+
+
+      Un DBA debe poner en practia estas tecnicas en la base de datos ya que el gobierno de datos dicta que los datos sonsensibles y hay que clasisificarlos y tratarlos de maneras distintas
+
 ## Ofuscacion
 es uan tecnica para proteger los datos no todos podrian ver todo, por ejemplo numeros de terjetas de credito o numeros de telefonos, esos datos deberian estar afuscado para que nadie externo los pueda leer. ej:
 
@@ -41,12 +78,9 @@ es uan tecnica para proteger los datos no todos podrian ver todo, por ejemplo nu
 
 Esto sirve por si un desarollador necesita hacer cambios pero el no deberia ver los numeros de telefono entonces se les aplica este formato pueden ser x o *
 
-- Calidad de datos
-- Seguridad de datos
-- Complimineto normativo
-- Roles y responsabilidad
-    - Usuario -> Rol -> Privilegio
+## Clasificacion de datos
 
+ver que datos son sensibles que columnas son privadas y de arta importancia
 
 # Estructuras de almacenamiento
 
@@ -94,7 +128,7 @@ Los datos por si solos no representan nada.
 
 <br>
 
-**Tabla profesores**
+**Tabla cursos**
 |ID_curso(PK)|Nombre_curso|ID_Profesor(FK)|Precio|
 |:--:|:--:|:--:|:--:|
 |1|SQL basico|1|50 USD|
@@ -228,7 +262,7 @@ Los datos por si solos no representan nada.
 
 ---
 
-## tipos de llaves (key)
+## Tipos de llaves (key)
 
 - **llave primaria - llave primaria compuesta** la primaria es el identificador unico, y la primaria compuesta utilizas 2 columnas para identificar algo
 
@@ -238,11 +272,16 @@ Los datos por si solos no representan nada.
 
 - **fuerte** por su sola existe no depende de otra
 - **debil** no tiene sentido sin el dato de otra tabla depende de otra tabla
+- **intermedias** tablas que sirven para relaciones muchos a muchos
+- **Maestras** las que casi nunca cambian como paises tipo de productro etc
+- **Transacionales** guardan reguistros ej: ventras, transacciones  
  
 ## COBIT
 
 Todo tiene que cumplir lo que dice cobit es una asociacion que hace audiotia y rige como se maneja todo lo que se desarolla "cubo cobit".
 
+![bubo cobit](./src/cubo_cobit.png)
+ 
 ### 1.3 Administracion de base de datos
 existen administradores y de darolladores
 
@@ -296,9 +335,6 @@ es los tipos de datos que tiene un base de datos es el elemento madre para decii
             |______Tablas, Indices
     |_______Fichero de log ( .ldf )
 
-Se puede eliminar registrros de tablas relaciones pero NO de una tabla relacion
-
-la informacion y los analizis y estadisticas vienen de tablas relacionales
 
 ## Estructura de una base de datos
 - Tablas
@@ -315,23 +351,28 @@ la informacion y los analizis y estadisticas vienen de tablas relacionales
 
 ## ADO
 
+o el mas reciente ADO.NET es una libreria que c# creada por microsoft para mejorar la conecion de aplicaciones con la base de datos en el puente entre tu codigo con la base de datos
+
 # Un data center por dentro
 
 Un data enter cuenta con un sitema de gestion de respaldo de energia, hace que nunca pare aunque se corte la energia. Tienen autonomia y un cierto timpo de vida lo minimo es de 30 min, para hacer respaldos o usar protocolos para apagado del servidor.
 
 Sistemas de climatzacion un data center tine uqe estar bien refrigerados con dstintos metodos ya que los componentes necesitan estar refrigerados para no dañarse.
 
-Seguridad fisica, nadie ingre a toda la insfrecstructura sin autorizacion, y en el caso que haya hay un protocolo de ingreso
+Seguridad fisica, nadie ingrese a toda la insfrecstructura sin autorizacion, y en el caso que haya hay un protocolo de ingreso
 
-<Servidor de coneccion remoto EXPONER>
 
 Existen 3 tipos de hambientes:
 - **Area de energia** donde estan los respaldos de energia, alimenta a los IDF y MDF
-- **Area de comunicaciones** donde estan todas las conexciones de la institucion la maprte mas importante, comunica al datacenter con el usuario *MDF* Main distribution frame
 
-<investigar IDF MDF>
+- **Area de comunicaciones** donde estan todas las conexciones de la institucion la parte mas importante, comunica al datacenter con el usuario *MDF* Main distribution frame
 
 - **Area de servidores** Deben ser seguros y no dejar pasar a cualquiera asi por asi, tiene que estar bien refrigerados.
+
+## Area de comunicaciones
+
+Tenemos que aclarar puntos claves el **MDF main distribueicion frame** es donde entra el internet de el ISP y los **IDF intermediate distibueicion frame** los puntos de conecion, si el MDF cae todo se queda sin conecion eso es fatal
+
 
 ---
 
@@ -339,7 +380,7 @@ la difernecia entre gestor de base de datos y un administrador de  base de datos
 
 # Manipulacion de datos
 
-Un dataset es una tabla procesada, un data set se puede generar por una consulta
+Un dataset es una tabla procesada, un data set se puede generar por una consulta, se guarda en local y luego se suben los datos
 
 # Componentes de SQL
 
@@ -348,14 +389,13 @@ Un dataset es una tabla procesada, un data set se puede generar por una consulta
     - CREATE
     - DROP
     - ALTER
+    - CREATE INDEX
 
 - DML
     - INSERT
     - UPDATE
     - DELATE
     - SELECT
-
-<que es un predicado>
 
 - DCL
     - REVOKE
@@ -368,15 +408,6 @@ Un dataset es una tabla procesada, un data set se puede generar por una consulta
     - SAVEPOINT
     - SET TRANSACTION
 
-index <examen investigar ojo aqui> 
-
-## Pista de Auditoria (log)
-
-### log de sistema
-
-### log de aplicacion
-
-registta los eventos importantes dentro de un programa, errores, etc
 
 ## Storge 
 
