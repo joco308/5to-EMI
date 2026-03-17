@@ -4,7 +4,7 @@ No solamante almacenan datos es un conjunto de elementos que permiten darle util
 
 ## Que es
 
-Es una manera estrategica de como guardad y generar estrategias con datos, no solamente es un programa, es un sitema que se basa en 4 principales elementos:
+Es una manera estrategica de como guardar y generar estrategias con datos, no solamente es un programa, es un sitema que se basa en 4 principales elementos:
 
 - **Personas.-** Aquellas que utilizan y gestionan los datos
 - **Procedimientos.-** Son las normas y las reglas de como se manipularan esos datos
@@ -32,7 +32,7 @@ es utilizar la informacion para tomar deciciones
 La informacion tiene que cumplir ciertos criterios para que la informacion sea buena y nos permita tomar deciciones
 
 - **significado** que se entienda que puedes entender
-- **vigencia** que este calido al dia que lo vez
+- **vigencia** que este valido al dia que lo vez
 - **Valides** que sea real y coerente
 - **valor** que te quite una duda y ayude a tomar deciciones
 
@@ -40,15 +40,91 @@ La informacion tiene que cumplir ciertos criterios para que la informacion sea b
 
 ## Cadena de valor 
 
-![cadena de valor](cadena_de_valor.png)
+![cadena de valor](./src/cadena_de_valor.png)
 
-- **Actividades Primarias** es lo mas importante es lo que hace que el producto sa haga y salga a la venta 
+- **Actividades Primarias** es lo mas importante es lo que hace que el producto sa haga y salga a la venta
 
 - **Actividades Secundarias** la logistica para que funcionen las actividades primarias
 
+
+      El sistema de informacion se aencarga de comunicar las actividades de la cedena de valor para que todo funcione
+
 ---
 
-## tipos de Sistemas
+## Para que un sistema de informacion funcione necesita:
+
+- **Hardware**
+- **Software**
+- **Personas**
+- **Datos**
+- **Procesos**
+
+## La administracion del sistema de informacion
+
+El **(SI)** debe estar alineado con la estrategia de la organizacion
+
+Estrategia es los pasos a seguir para llegar ejecutar un objetivo la estrategia tiene que ir de la mano con la tecnologia para tener una buena estratgegia se debe elejir una buena tecnologia para que se alinen
+
+### Roles y perfiles de un SI
+
+- **Direcion de SI** El director de orquesata el de promone estrategias y define la linea del proyecto el de las ideas
+- **Gestor de SI** EL que lleva acavo lo que la Direccion de SI dice es el apartado tecnico el como se hara lo que se pide
+
+
+#### Roles:
+
+- **CIO** el director el que planifica estrategias y da ideas de implementacion
+- **Jefe de proyecto** se encarga de vcer que lo planificado se lleve acavo y que se ejecute
+- **Tecnicos en desarrollo** son los que se encargan de contruiir mantener y renovar
+- **Tecnicos en explotacion** son los que se encargan en que el hardweare este funcionando para mantener el SI
+- **Tecnicos en sistemas** los que añaden nuevas implementaciones
+
+## Departamento de SI
+
+antes llamado departamento de informatica se encarga de toda la tecnologia es el intermediario entre la organizacion y la tecnologia
+
+## Gobierno de los sistemas de informacion
+
+Rije estandares, normas y buenas practicas para la sistematizacion y administracion de SI
+
+Modelos de refetencia:
+
+- COBIT
+- TOGAF
+- ISO/IEC 20000
+- ITIL (Biblioteca de buenas practicas para la implementacion de IT)
+
+### ITIL
+
+el siclko de vida de v3:
+
+- **EStrategia del servicio .-** Define que servicios y para quienes va los servicios
+
+- **Diseño del servicio .-** Como implementar ese servicio estructurarlo,. prodecimientos etc
+
+- **Trancicion del serivicio .-** Etapa de pruevas antes del despliege para evitar errores
+
+- **Operacion del servicio .-** El dia adi mantinimiento y solucionar los problemas que los hay que siga funcionando el servicio
+
+- **Mejora continua del servicio** siempre tratar de mejorar el servicio con actualizaciones y cambios
+
+      ITIL v4 sisre para fortelece el trabajoi en equipo y prioridad el cliente lo que quiere
+
+## Tipologias de SI
+
+### SI integrados
+
+son modulares se adaptan a la estrategia del sistema, proporciana la mayoria de funciones requeridas
+
+### SI operacionales
+
+Aportan a las operaciones y transacciones de la organizacion
+
+- **ERP** unifica varios modulos para el area de ventas, contabilidad, almacen, etc
+
+- **CRM** orientado a la gention de comunicacoin con el cliente tanto actuales como potenciales sirve para entender mas al cliente, asi nos permite vender mas y mejor
+
+- **SCM** se encarga de el area de almacen y finanzas se sencartga que los suiministros lleguen y bien
 
 ### Impementacion de sistema de informacion
 
@@ -69,8 +145,24 @@ Aplicar las tecnicas necesarias para proteger dicha informacion.
 Tenemos que ver que el sistema de informacion a que apunta cuan es su objetivo, requiere una administracion cordinada entre direccion y gestion, la tecnologia que acompañe depende del tiempo de actualizacion, acordes a la demanda de la organizacion
 
 
+# Proceso de desarrollo de sistemas
 
+es los pasos a seguir para implementar / desarollar un SI, lo que los administradores y programadores deben seguir 
 
+## Jerarquia de trabajo
+
+es como se organiza esew conjunto de actividades a seguir para crear un sistema
+
+- **Proceso del software .-** es todas las actrividades de el proceso de desarollo en general aca se decide los roles y como se llevara acavo este desarollo
+
+- **Actividad estructural .-** aca estan esos bloques de procesos esas faces como implemantar, contruir la db
+
+- **Accion de ingenieria .-** el objetivo de las faces en cada fave hay un objetivo para cumplir con lo que uiqre la fece hacer
+
+- **Conjunto de tareas .-** son lo pasos minusculos y a menudo tecnicos
+
+      Existen modelos que definen las fases y la proseso de dofware estas son:
+  
 ## Modelo lineal
 
 Analisis -> Diseño -> Codigo -> Pruebas
@@ -81,52 +173,47 @@ Tiene 5 faces para trabajar
 
 autor presma
 
-- **Comunucacion** genera el inicio del proyecto y recabar los requirimientos, deberias recopilar informacion, y definir objetivos del proyecto y definir alcance y limites e identificamos los problemas.
+- **Definicion/Comunucacion** genera el inicio del proyecto y recabar los requirimientos, deberias recopilar informacion, y definir objetivos del proyecto y definir alcance y limites e identificamos los problemas.
 
-- **Planeacion** se hace 3 tareas importantes, la primera estimacion, no se puede dar tiempo, costos y la distribucion de responsabilidades exacto por eso se hace una estimacion, se hace una programacion de esos tiempos, ( Diagrama Gand ), y generar un seguimiento de las tareas que definimos, emmpieza en planificacion y termina cuando termina el modelo
+- **Planeacion/analisis** se hace 3 tareas importantes, la primera estimacion, no se puede dar tiempos costos y la distribucion de responsabilidades exacto por eso se hace una estimacion, se hace una programacion de esos tiempos, ( Diagrama Gand ), y generar un seguimiento de las tareas que definimos, emmpieza en planificacion y termina cuando termina el modelo
 
-- **Modelado** primero se de la etapa de analisis y luego diseño. Aplicamos el principio de modularidad (divide y venseras) el sistema se divide en partes y se modela cada uno 
+- **Modelado/Diseño** primero se de la etapa de analisis y luego diseño. Aplicamos el principio de modularidad (divide y venseras) el sistema se divide en partes y se modela cada uno 
 
-- **Costruccion** Generamos codigo y pruebas con pequeños bloques de codigo
+- **Costruccion/dasrrollo** Generamos codigo y estructuremos bien los modulos y procedimientos
 
-- **Despliegue** igual se hacen pruebas
+- **Pruebas .-** Proceso de pruebas antes de que salga al publico detecta errores en general
 
-<Estudiar es el modelo mas importante este el de cascada>
-
-autor muller
-
-- Definicion
-- Analisis
-- Diseño
-- Desarrollo
-- Pruebas
-- Mantenimiento
+- **Despliegue/Mantenimiento** se debe dar un mantenimiento al software
 
 ## modelo de construccion de prototipos
 
 Busca recolectar atrabaes de un prototipo los requerimientos del sistema, costiste que le presentes un prototipo propio o no propio al cliente para que identifique lo que quiere.
 
-etapas clasica:
-
-
-
 tiene un siclo:
 
-- Comunicacion
-- Plan rapido
-- Modelado diseño rapido
+- Comunicacion/definicion de requisitos
+- Plan rapido/Diseño rapido
+- Modelado diseño rapido/diseño rapido
 - Construccion del Prototipo
-- Desarrollo entrega retroalimentacion
+- Desarrollo entrega retroalimentacion/ cliente evalua el protototipo
 
 ## Modelo de desarrollo rapido de aplicaciones DRA
 
-se separa por equipos, y trabajan de manera simultanea, se necesita dividir en parte para distribuir a los equipos, basado en lineal secuencial
+se separa por equipos, y trabajan de manera simultanea, se necesita dividir en parte para distribuir a los equipos, basado en lineal secuencial, sisve para sistemas moduralizables
+
+- Modelado de gestion/Analisis
+- Modelado de datos/diseño
+- Modelado de procesos/codigo
+- Generacion de aplicaciones/codigo
+- pruebas y entraga/pruebas
+
+      Se reutiliza codigo de otros proyectos y se adapta a este en el paso de "Generacion de aplicaciones"
 
 ## modelo evolutivos
 
 ### Modelo incremental 
 
-va avanzndo por incrementos cada infremento tiene analisis, diseño, codigo y pruebas, un incremento es como una iteracion, cada incremento es un avance osea agrefa funcionalidades o mejoras de sistema
+va avanzndo por incrementos cada infremento tiene analisis, diseño, codigo y pruebas, un incremento es como una iteracion, cada incremento es un avance osea agrega funcionalidades o mejoras de sistema
 
 ### Modelo Espiral
 
