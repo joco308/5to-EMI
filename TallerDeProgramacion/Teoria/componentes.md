@@ -8,6 +8,8 @@ son porciones de codigo que se pueden reutilizar, se puede creear componentes en
 
 Se basan en atomos, no se pueden dividir, y esos atomos se juntan para crear un componente y asi susesivamentes
 
-<antomic disaing todos sus componentes>s
+<antomic disaing todos sus componentes>
+
+<notejs instalacion y todo>
 
 

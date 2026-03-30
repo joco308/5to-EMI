@@ -86,8 +86,25 @@ Induccion algo inducio a llegar a ese punto y se contradice si es que no es la o
 - Progrmacion Dinamica
 - Backtracking / Busqueda Completa
 
+## Busqueda amplitut
+
+Utilizamos una cola la cual empezamos con el raiz pondemos en la cola sus hijos, y de la cola sacamos sus hijos y iteramos asi hata que encontremos el numero buscado o la cola este vacia
 
 
+## Busqueda en profundidad
+
+Utiliza una pila, entramos a raiz y ponemos en la pila sus hijos y asi buscamos en progundida 
+
+## Busqueda con retroceso
+
+
+
+## Busqueda en profundidad progresiva
+
+
+
+## Busqueda en bidireccional en amplitud
+<investigar estos 3 y hacer un video>
 
 
 
