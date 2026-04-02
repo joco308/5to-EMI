@@ -123,6 +123,48 @@ Definicion semi-formal del modelado de UML
 
 <investigar historia UML que significa, clasificacion de los diagramas>
 
+## Modelo
+
+Captura una vista de un sistema del mundo real. esl una abstraccion de dicho sistema, considerando un cierto propocito. Asi, el modelo describe completamente aquellos aspectos del sistema que son relevantes al proposito del modelo, y a un aorioiado nivel detalle
+
+## diagrama
+
+<completar>
+
+## Vistas de `Kruchten`
+
+<completar>
+
+## Vistas UML
+
+- **Vista de casos de uso**
+- **Vista de diseño**
+- **Vista de procesos**
+- **Vista de implementacion**
+- **Vista de despliegue**
+
+## Diagramas de UML
+
+<completar UML 2 5 1>
+
+Diagrama de casos de uso
+Diagrama de clases
+Diagramas de objetos
+**Diagramas de comportamiento**
+   Diagrama de estados
+   Diagrama de actividad
+   Diagramas de interacion
+
+<investigar principio de pareto>
+
+con el 20% de diagramas puedo modelas rl 80% del sistema 
+
+## Diagrama de paquetes
+
+<completar>
+
+## Diagrama de casos de uso
+
 
 
 
