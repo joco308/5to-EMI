@@ -166,6 +166,7 @@ con el 20% de diagramas puedo modelas rl 80% del sistema
 ## Diagrama de casos de uso
 
 - Diagrma de casos de uso alto nivel
+
 - Diagrma de casos de uso expandido/por proceso
 
 

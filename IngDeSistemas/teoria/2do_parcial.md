@@ -38,6 +38,20 @@ Proceso de transformar requerimientos en una arquitectura del sistema
 - **Integracion** Consiste en la contruccion de los componentes del sistema
 - **Implementacion** Se combinan los subsistemas para dotmar el sistema completo
 
+<investigar que es una EDT>
+
+## Objetivos de la EDT
+
+- Organizar el trabajo
+- Facilitar la planificacion
+- Asignar Responsabilidades
+- Controlar avances
+
+
+
+
+
+
 
 
 
