@@ -106,5 +106,57 @@ Utiliza una pila, entramos a raiz y ponemos en la pila sus hijos y asi buscamos 
 ## Busqueda en bidireccional en amplitud
 <investigar estos 3 y hacer un video>
 
+# Grafos
+
+<investigar que es u grafo>
+
+## Tipos de grafos
+
+- Simple 
+- Multigrafo
+- Pseudografo
+- Ponderado
+- Dirigido
+- Multigrafo dirigido
+
+## Grado de un vetice 
+
+Es el numero de aristas que inciden que salen de el
+y el grado del grafo es la sumatoria
+
+## Camino, cadenas y ciclos
+
+### Cadena
+
+Que todos los verives esten conectados
+
+### Camino
+
+Tiene un nodo de inicio y nodos intermedios para llegar a su nodo destino
+
+### Ciclo
+
+Se forman bucles o ciclos entre nodos
+
+### Cadena cerrada
+
+todos los nodos se conectan y se cierra el ciclo
+
+### Conexo
+
+<investigar>
+
+## Caminos euclerianos y civlos auquerianos
+### camino eugleriano
+
+Es aquel que rocore todo el grafo sin repetir una coneccion, esto se cumplira siempre y cunedo
+
+esto se cumplira siempre y cundo un grafo no tenga mas de 2 vertices con garado impar
+
+### Civlo euleriano
+
+Es aquel siclo que recore todo el grafo sin repetir una coneccion este se cumplirra solo cuando todos losm vertices del grafo son grado par
+
+![grafo Eucleriano]("./src/grafo-eucleriano.png")
 
 
