@@ -175,9 +175,36 @@ con el 20% de diagramas puedo modelas rl 80% del sistema
 
 - Diagrma de casos de uso expandido/por proceso
 
+### Casos de uso de alto nivel 
 
-## 
+Estos casos de uso generalmente son muy breves describiendo proecsos en dos o tres oraciones.
 
+### Casos de uso exmandido
+
+Son descripciones ..
+
+<completar casos de uso alto y bajo nivel>
+
+## Diagrama de secuencia
+
+<investigarEstudio como se hace>
+<completar>
+
+Este diagrama 
+
+## Diagrama de colavoracion
+
+<completar>
+
+## Diagrama de clase
+
+<completar>
+
+## Diagrama de objetos
+
+<completar>
+
+Primero se hace este antes del de clases
 
 
 
