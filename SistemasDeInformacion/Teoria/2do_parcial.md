@@ -2,13 +2,19 @@
 
 <investigar historia de las metodologias>
 
+## ¿Que es una metodologia? 
+
+Es un marco de trabajo que nos dice como levantar un sistema no dice `Quien` hace, `Como` lo hace, `Cuando` debe estar listo, `Que` documentos o piesas de codigo entregar.
+
+Es un conjunto de tareas reglas y herramientas para llevar acabo el sistema
+
 ## Definicion
 
 Es el proceso unificado racional o rational, usa UML 
 
 RUP es un proceso formal que asigna tarea y responsabilidades en una organizacion de desarrollo
 
-Aseguro el software de alta calidad. Existen 3 autores en esta metodologia
+Asegura el software de alta calidad. Existen 3 autores en esta metodologia
 
 ## Origenes
 
@@ -18,8 +24,6 @@ Aseguro el software de alta calidad. Existen 3 autores en esta metodologia
 
 ## Evolucion del proceso
 
-<buscar arbolgenealogico>
-
 ### Metodo Ericsson
 
 Base del proceso unifiado de desarrollo
@@ -27,6 +31,10 @@ Base del proceso unifiado de desarrollo
 RUP 4.0
 incorporacion de enfoque Rational
 Origen de UML con la combinacion de OMT de RUMbaugh y booch
+
+### Rational Software
+
+Fue la compañía que desarrolló el lenguaje UML y la metodología RUP. Más tarde fue comprada por IBM, por lo que hoy en día lo verás a menudo como "IBM Rational".
 
 <investigar RUP, ration software, y UML y RUP 4.1>
 
@@ -51,8 +59,6 @@ RUP es un conjunto de buenas practicas
 
    - La arquitectura del sftware es la base del sistema 
    - Se revisa y se mejora con cada iteracion
-
-<investigarConceptos arquitectura de software>
 
 ## Roles y responsabilidades
 <profundizar>

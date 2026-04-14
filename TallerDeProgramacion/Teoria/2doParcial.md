@@ -12,4 +12,11 @@ Se basan en atomos, no se pueden dividir, y esos atomos se juntan para crear un 
 
 <notejs instalacion y todo>
 
+# React
+
+
+
+
+
+
 

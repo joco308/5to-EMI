@@ -120,7 +120,7 @@ CREATE TABLE tipo_de_servicio (
 
 -- ============================================================
 -- 10. contrasenas_administradores
--- ============================================================
+-- ============================================================a
 CREATE TABLE contrasenas_administradores (
     id_contrasena   INT IDENTITY(1,1) NOT NULL,
     contrasena_hash VARBINARY(64)     NOT NULL,
