@@ -159,4 +159,30 @@ Es aquel siclo que recore todo el grafo sin repetir una coneccion este se cumpli
 
 ![grafo Eucleriano]("./src/grafo-eucleriano.png")
 
+## Red
+Es un par (N,E) en un conjunto X, donde N es un conjunto no vacio de puntos de x, E es un subconjunto de aristas $NxN$, en el que no hay elemenos repetidos ni de la forma (ni, ni) A una res se le pueden asociar funciones capaces de dar valores espeficicos de cada una de las aristas
+
+## Red no dirigida 
+
+Es una red coyo subconjunto de E esta formado por aristas no dirigidas
+
+## REd dirigida 
+
+Es una red cuyo subconjunto de aristas E esta formado por aristas dirigidas
+
+
+### Cuello de botalla
+Es el minomo de las capacidades reciduales de las aristas de P
+
+
+<completar>
+
+|n|Nodos resueltos conectados directamente a nodos no resueltos|Nodo no resulto mas cecano conectado|Distancia total involucrada|N-esimo nodo mas cercano|Distancia minima|Ultima coneccion|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+1|O|A|2|A|2|O-A
+2-3|O-A|C-B|4-4|B|4|A-B
+4|A-B-C|D-E-E|9-7-8|E|7|B-E
+5|A-B-E|D-D-D|9-8-8|D|8|B-D
+6|D-E|T-T|13-14|T|13|D-T
+
 

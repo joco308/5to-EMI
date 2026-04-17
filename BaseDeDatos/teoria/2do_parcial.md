@@ -65,6 +65,23 @@ Unidad academica
 3|3|5
 2|2|5
 
+## Tabla entidad
+
+No deberia borrarse ya que otras depende de esas
+
+## Tabla relacion
+
+Esas si deberia moificar y es de accceso contante todo el tiempo cambia la informacionae
+
+
+# Roles
+
+## Usuarios
+
+## Roles
+
+
+## Privilegios
 
 
 
