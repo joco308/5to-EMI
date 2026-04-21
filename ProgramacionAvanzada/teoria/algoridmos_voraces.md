@@ -174,8 +174,13 @@ Es una red cuyo subconjunto de aristas E esta formado por aristas dirigidas
 ### Cuello de botalla
 Es el minomo de las capacidades reciduales de las aristas de P
 
+### Camino de aumento
+
+Es un camino sin nodos repetido que unen origen con destino
 
 <completar>
+
+## Ruta mas corta
 
 |n|Nodos resueltos conectados directamente a nodos no resueltos|Nodo no resulto mas cecano conectado|Distancia total involucrada|N-esimo nodo mas cercano|Distancia minima|Ultima coneccion|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -184,5 +189,24 @@ Es el minomo de las capacidades reciduales de las aristas de P
 4|A-B-C|D-E-E|9-7-8|E|7|B-E
 5|A-B-E|D-D-D|9-8-8|D|8|B-D
 6|D-E|T-T|13-14|T|13|D-T
+
+## Arbol de exmancion minimo
+
+Suma todos los espacios para poder conectarse aunque los que no llevan a el bjetivos pero solo a los minimos
+
+## Algoridmo de FORD FULKERSON
+
+<completar>
+
+# Progrmaacion Dinamica
+
+Es un metodo de optimizacion dividiendolo en probleas mas pequeñños y superpuestos.
+
+- **Funcion de valor optimo** 
+- **Funcion de olitica optima**  
+
+
+
+
 
 
