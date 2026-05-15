@@ -136,9 +136,8 @@ INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
 INSERT INTO Roles (nombre_rol, salario) VALUES
 ('Gerente',        8000),  -- id 1
 ('Administrador',  6000),  -- id 2
-('Supervisor',     4500),  -- id 3
-('Operario',       3000),  -- id 4
-('Tecnico',        3500);  -- id 5
+('Trabajador',     4500),  -- id 3
+
 
 -- ============================================================
 -- 4. ESTADO_CALIDAD
@@ -188,37 +187,16 @@ VALUES
 (1, 15, 20, 11, 1, 1,
  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
  'gerente@sasl.com', 12345678, 'Carlos Mamani', '1980-03-15', 0, 0),
+()
 -- Administrador
 (2, 14, 20, 12, 2, 1,
  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
  'admin@sasl.com', 87654321, 'Maria Quispe', '1985-07-22', 0, 0),
--- Supervisor
+-- Trabajador
 (3, 14, 19, 11, 3, 1,
  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
  'supervisor1@sasl.com', 11223344, 'Juan Flores', '1990-01-10', 0, 0),
--- Operarios
-(4, 14, 18, 11, 4, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'operario1@sasl.com', 22334455, 'Pedro Condori', '1992-05-18', 0, 0),
-(4, 14, 18, 12, 5, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'operario2@sasl.com', 33445566, 'Ana Choque', '1994-11-30', 0, 0),
-(4, 16, 18, 11, 6, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'operario3@sasl.com', 44556677, 'Luis Huanca', '1991-08-05', 0, 0),
-(4, 14, 19, 11, 7, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'operario4@sasl.com', 55667788, 'Rosa Ticona', '1993-02-14', 0, 0),
--- Tecnico
-(5, 15, 19, 11, 8, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'tecnico1@sasl.com', 66778899, 'Miguel Apaza', '1988-09-25', 0, 0),
-(5, 14, 20, 11, 9, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'tecnico2@sasl.com', 77889900, 'Diego Vargas', '1987-12-03', 0, 0),
-(3, 15, 20, 12, 10, 1,
- '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
- 'supervisor2@sasl.com', 99001122, 'Lucia Mendez', '1989-06-17', 0, 0);
+(1,15,20,11,1,1,'$2a$11$YMzEfJ06.NfSMQ0ImRTLEufx3jWQB6TeEWdxLnDIdnh.L92svo3f.','jqnpnlz@gmail.com',13440068,'Joaquin Peñaloza','1980-03-15',0,0)
 
 -- ============================================================
 -- 7. TELEFONOS USUARIOS
