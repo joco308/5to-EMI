@@ -206,5 +206,7 @@ Este diagrama
 
 Primero se hace este antes del de clases
 
+# Modelado de negocio
+
 
 
