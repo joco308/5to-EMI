@@ -1,430 +1,465 @@
-CREATE TABLE [Dominios] (
-  [id_dominio] INT PRIMARY KEY IDENTITY(1,1),
-  [Dominio] NVARCHAR(100),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE()
+-- ============================================================
+--  DDL reconstruido desde los modelos EF Core de Api_SASL
+--  Generado el 2026-05-14
+-- ============================================================
+
+-- -----------------------------------------------------------
+-- Dominio
+-- -----------------------------------------------------------
+CREATE TABLE Dominio (
+    IdDominio   INT             NOT NULL IDENTITY(1,1),
+    Dominio1    NVARCHAR(MAX)   NOT NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Dominio PRIMARY KEY (IdDominio)
 );
 
-CREATE TABLE [Sub_dominios] (
-  [id_sub_dominios] INT PRIMARY KEY IDENTITY(1,1),
-  [id_dominio] INT,
-  [detalle] NVARCHAR(100),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Sub_dominios_id_dominio]
-    FOREIGN KEY ([id_dominio])
-      REFERENCES [Dominios]([id_dominio])
+-- -----------------------------------------------------------
+-- SubDominio
+-- -----------------------------------------------------------
+CREATE TABLE SubDominio (
+    IdSubDominio    INT             NOT NULL IDENTITY(1,1),
+    IdDominio       INT             NOT NULL,
+    Detalle         NVARCHAR(MAX)   NOT NULL,
+    CreateAt        DATETIME2       NOT NULL,
+    UpdateAt        DATETIME2       NOT NULL,
+    CONSTRAINT PK_SubDominio PRIMARY KEY (IdSubDominio),
+    CONSTRAINT FK_SubDominio_Dominio FOREIGN KEY (IdDominio)
+        REFERENCES Dominio (IdDominio)
 );
 
-CREATE TABLE [Provedores] (
-  [id_provedor] INT PRIMARY KEY IDENTITY(1,1),
-  [id_empresa] INT,
-  [NIT] INT,
-  [nombre] NVARCHAR(50),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Provedores_id_empresa]
-    FOREIGN KEY ([id_empresa])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- Role
+-- -----------------------------------------------------------
+CREATE TABLE Role (
+    IdRol       INT             NOT NULL IDENTITY(1,1),
+    NombreRol   NVARCHAR(MAX)   NOT NULL,
+    Salario     INT             NOT NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Role PRIMARY KEY (IdRol)
 );
 
-CREATE TABLE [Recursos] (
-  [id_recurso] INT PRIMARY KEY IDENTITY(1,1),
-  [id_provedor] INT,
-  [id_tipo] INT,
-  [nombre] NVARCHAR(100),
-  [descripcion] NVARCHAR(300),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Recursos_id_provedor]
-    FOREIGN KEY ([id_provedor])
-      REFERENCES [Provedores]([id_provedor]),
-  CONSTRAINT [FK_Recursos_id_tipo]
-    FOREIGN KEY ([id_tipo])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- Direccion
+-- -----------------------------------------------------------
+CREATE TABLE Direccion (
+    IdDireccion INT             NOT NULL IDENTITY(1,1),
+    IdZona      INT             NOT NULL,
+    Calle       NVARCHAR(MAX)   NOT NULL,
+    NCasa       INT             NOT NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Direccion PRIMARY KEY (IdDireccion),
+    CONSTRAINT FK_Direccion_SubDominio_Zona FOREIGN KEY (IdZona)
+        REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Direccion] (
-  [id_direccion] INT PRIMARY KEY IDENTITY(1,1),
-  [id_zona] INT,
-  [calle] NVARCHAR(100),
-  [n_casa] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Direccion_id_zona]
-    FOREIGN KEY ([id_zona])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- UsuarioTrabajador
+-- -----------------------------------------------------------
+CREATE TABLE UsuarioTrabajador (
+    IdUsuario           INT             NOT NULL IDENTITY(1,1),
+    IdEstadoCivil       INT             NOT NULL,
+    IdGradoAcademico    INT             NOT NULL,
+    IdGenero            INT             NOT NULL,
+    IdDireccion         INT             NOT NULL,
+    IdRol               INT             NOT NULL,
+    IdPais              INT             NOT NULL,
+    ContrasenaHash      NVARCHAR(MAX)   NOT NULL,
+    Correo              NVARCHAR(MAX)   NOT NULL,
+    Ci                  INT             NOT NULL,
+    NombreUsuario       NVARCHAR(MAX)   NOT NULL,
+    FechaNacimiento     DATE            NOT NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    Codigo2fa           NVARCHAR(MAX)   NULL,
+    Expiracion          DATETIME2       NULL,
+    Pediente2fa         BIT             NULL,
+    ServicioAsignado    BIT             NOT NULL,
+    CONSTRAINT PK_UsuarioTrabajador PRIMARY KEY (IdUsuario),
+    CONSTRAINT FK_UsuarioTrabajador_EstadoCivil     FOREIGN KEY (IdEstadoCivil)    REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_UsuarioTrabajador_GradoAcademico  FOREIGN KEY (IdGradoAcademico) REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_UsuarioTrabajador_Genero          FOREIGN KEY (IdGenero)         REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_UsuarioTrabajador_Pais            FOREIGN KEY (IdPais)           REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_UsuarioTrabajador_Direccion       FOREIGN KEY (IdDireccion)      REFERENCES Direccion (IdDireccion),
+    CONSTRAINT FK_UsuarioTrabajador_Role            FOREIGN KEY (IdRol)            REFERENCES Role (IdRol)
 );
 
-CREATE TABLE [Roles] (
-  [id_rol] INT PRIMARY KEY IDENTITY(1,1),
-  [nombre_rol] NVARCHAR(50),
-  [salario] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE()
+-- -----------------------------------------------------------
+-- Tabla de union muchos-a-muchos: UsuarioTrabajador <-> SubDominio (Carreras)
+-- Inferida de la coleccion IdCarreras en UsuarioTrabajador
+-- -----------------------------------------------------------
+CREATE TABLE UsuarioTrabajador_Carrera (
+    IdUsuario       INT NOT NULL,
+    IdSubDominio    INT NOT NULL,
+    CONSTRAINT PK_UsuarioTrabajador_Carrera PRIMARY KEY (IdUsuario, IdSubDominio),
+    CONSTRAINT FK_UTCarrera_Usuario     FOREIGN KEY (IdUsuario)    REFERENCES UsuarioTrabajador (IdUsuario),
+    CONSTRAINT FK_UTCarrera_SubDominio  FOREIGN KEY (IdSubDominio) REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Usuario_trabajador] (
-  [id_usuario] INT PRIMARY KEY IDENTITY(1,1),
-  [id_estado_civil] INT,
-  [id_grado_academico] INT,
-  [id_genero] INT,
-  [Id_direccion] INT,
-  [id_rol] INT,
-  [id_pais] INT,
-  [contraseña_hash] NVARCHAR(60),
-  [correo] NVARCHAR(100),
-  [ci] INT,
-  [nombre_usuario] NVARCHAR(100),
-  [fecha_nacimiento] DATE,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  [codigo2fa] INT,
-  [expiracion] DATETIME2,
-  [pendiente_2fa] BIT,
-  [servicio_asignado] BIT,
-  CONSTRAINT [FK_Usuario_trabajador_id_genero]
-    FOREIGN KEY ([id_genero])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Usuario_trabajador_id_pais]
-    FOREIGN KEY ([id_pais])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Usuario_trabajador_id_grado_academico]
-    FOREIGN KEY ([id_grado_academico])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Usuario_trabajador_id_estado_civil]
-    FOREIGN KEY ([id_estado_civil])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Usuario_trabajador_Id_direccion]
-    FOREIGN KEY ([Id_direccion])
-      REFERENCES [Direccion]([id_direccion]),
-  CONSTRAINT [FK_Usuario_trabajador_id_rol]
-    FOREIGN KEY ([id_rol])
-      REFERENCES [Roles]([id_rol])
+-- -----------------------------------------------------------
+-- Cliente
+-- -----------------------------------------------------------
+CREATE TABLE Cliente (
+    IdCliente           INT             NOT NULL IDENTITY(1,1),
+    IdEmpresa           INT             NOT NULL,
+    IdDireccion         INT             NOT NULL,
+    NombreCliente       NVARCHAR(MAX)   NOT NULL,
+    ContactoEmergencia  NVARCHAR(MAX)   NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_Cliente PRIMARY KEY (IdCliente),
+    CONSTRAINT FK_Cliente_Empresa   FOREIGN KEY (IdEmpresa)   REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_Cliente_Direccion FOREIGN KEY (IdDireccion) REFERENCES Direccion (IdDireccion)
 );
 
-CREATE TABLE [Uniformes] (
-  [id_uniforme] INT PRIMARY KEY IDENTITY(1,1),
-  [nombre_uniforme] NVARCHAR(100),
-  [talla] INT,
-  [descripcion] NVARCHAR(300),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE()
+-- -----------------------------------------------------------
+-- Servicio
+-- -----------------------------------------------------------
+CREATE TABLE Servicio (
+    IdServicio      INT             NOT NULL IDENTITY(1,1),
+    IdCliente       INT             NOT NULL,
+    IdDireccion     INT             NOT NULL,
+    TipoServicio    INT             NOT NULL,
+    FechaInicio     DATE            NOT NULL,
+    FechaFinal      DATE            NULL,
+    Costo           DECIMAL(18,2)   NOT NULL,
+    Descripcion     NVARCHAR(MAX)   NULL,
+    CreateAt        DATETIME2       NOT NULL,
+    UpdateAt        DATETIME2       NOT NULL,
+    CONSTRAINT PK_Servicio PRIMARY KEY (IdServicio),
+    CONSTRAINT FK_Servicio_Cliente      FOREIGN KEY (IdCliente)     REFERENCES Cliente (IdCliente),
+    CONSTRAINT FK_Servicio_Direccion    FOREIGN KEY (IdDireccion)   REFERENCES Direccion (IdDireccion),
+    CONSTRAINT FK_Servicio_TipoServicio FOREIGN KEY (TipoServicio)  REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [asignacion_Uniformes] (
-  [id_asignacion_uniformes] INT PRIMARY KEY IDENTITY(1,1),
-  [id_usuario] INT,
-  [id_uniforme] INT,
-  [fecha_entrega] DATE,
-  [fecha_devolucion] DATE,
-  [estado] NVARCHAR(50),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_asignacion_Uniformes_id_usuario]
-    FOREIGN KEY ([id_usuario])
-      REFERENCES [Usuario_trabajador]([id_usuario]),
-  CONSTRAINT [FK_asignacion_Uniformes_id_uniforme]
-    FOREIGN KEY ([id_uniforme])
-      REFERENCES [Uniformes]([id_uniforme])
+-- -----------------------------------------------------------
+-- Horario
+-- -----------------------------------------------------------
+CREATE TABLE Horario (
+    IdHorario   INT         NOT NULL IDENTITY(1,1),
+    HoraEntrada TIME        NOT NULL,
+    HoraSalida  TIME        NOT NULL,
+    CreateAt    DATETIME2   NOT NULL,
+    UpdateAt    DATETIME2   NOT NULL,
+    CONSTRAINT PK_Horario PRIMARY KEY (IdHorario)
 );
 
-CREATE TABLE [Capacitaciones] (
-  [id_capacitacion] INT PRIMARY KEY IDENTITY(1,1),
-  [nombre] NVARCHAR(100),
-  [descripcion] NVARCHAR(300),
-  [fecha] DATE,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE()
+-- -----------------------------------------------------------
+-- AsignacionEmpleado
+-- -----------------------------------------------------------
+CREATE TABLE AsignacionEmpleado (
+    IdUsuario       INT         NOT NULL,
+    IdServicio      INT         NOT NULL,
+    IdHorario       INT         NOT NULL,
+    DiasLaborales   INT         NOT NULL,
+    CreateAt        DATETIME2   NOT NULL,
+    UpdateAt        DATETIME2   NOT NULL,
+    CONSTRAINT PK_AsignacionEmpleado PRIMARY KEY (IdUsuario, IdServicio, IdHorario),
+    CONSTRAINT FK_AsignacionEmpleado_Usuario        FOREIGN KEY (IdUsuario)     REFERENCES UsuarioTrabajador (IdUsuario),
+    CONSTRAINT FK_AsignacionEmpleado_Servicio       FOREIGN KEY (IdServicio)    REFERENCES Servicio (IdServicio),
+    CONSTRAINT FK_AsignacionEmpleado_Horario        FOREIGN KEY (IdHorario)     REFERENCES Horario (IdHorario),
+    CONSTRAINT FK_AsignacionEmpleado_DiasLaborales  FOREIGN KEY (DiasLaborales) REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Carreras_usuario] (
-  [id_carrera] INT,
-  [id_usuario] INT,
-  PRIMARY KEY ([id_carrera], [id_usuario]),
-  CONSTRAINT [FK_Carreras_usuario_id_usuario]
-    FOREIGN KEY ([id_usuario])
-      REFERENCES [Usuario_trabajador]([id_usuario]),
-  CONSTRAINT [FK_Carreras_usuario_id_carrera]
-    FOREIGN KEY ([id_carrera])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- EstadoCalidad
+-- -----------------------------------------------------------
+CREATE TABLE EstadoCalidad (
+    IdEstadoCalidad     INT             NOT NULL IDENTITY(1,1),
+    EstadoCalidad1      NVARCHAR(MAX)   NOT NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_EstadoCalidad PRIMARY KEY (IdEstadoCalidad)
 );
 
-CREATE TABLE [Cliente] (
-  [id_cliente] INT PRIMARY KEY IDENTITY(1,1),
-  [id_empresa] INT,
-  [nombre_cliente] NVARCHAR(100),
-  [id_direccion] INT,
-  [contacto_emergencia] NVARCHAR(50),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Cliente_id_empresa]
-    FOREIGN KEY ([id_empresa])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Cliente_id_direccion]
-    FOREIGN KEY ([id_direccion])
-      REFERENCES [Direccion]([id_direccion])
+-- -----------------------------------------------------------
+-- Provedore (Proveedor)
+-- -----------------------------------------------------------
+CREATE TABLE Provedore (
+    IdProveedor INT             NOT NULL IDENTITY(1,1),
+    IdEmpresa   INT             NOT NULL,
+    IdProducto  INT             NOT NULL,
+    Nit         INT             NOT NULL,
+    Nombre      NVARCHAR(MAX)   NOT NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Provedore PRIMARY KEY (IdProveedor),
+    CONSTRAINT FK_Provedore_Empresa  FOREIGN KEY (IdEmpresa)  REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_Provedore_Producto FOREIGN KEY (IdProducto) REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Telefono_cliente] (
-  [id_telefono] INT PRIMARY KEY IDENTITY(1,1),
-  [telefono] INT,
-  [id_detalle] INT,
-  [id_cliente] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Telefono_cliente_id_detalle]
-    FOREIGN KEY ([id_detalle])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Telefono_cliente_id_cliente]
-    FOREIGN KEY ([id_cliente])
-      REFERENCES [Cliente]([id_cliente])
+-- -----------------------------------------------------------
+-- MarcaMaquinarium
+-- -----------------------------------------------------------
+CREATE TABLE MarcaMaquinarium (
+    IdMarcaMaquinaria   INT             NOT NULL IDENTITY(1,1),
+    IdPais              INT             NOT NULL,
+    NombreMarca         NVARCHAR(MAX)   NOT NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_MarcaMaquinarium PRIMARY KEY (IdMarcaMaquinaria),
+    CONSTRAINT FK_MarcaMaquinarium_Pais FOREIGN KEY (IdPais) REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Horario] (
-  [id_horario] INT PRIMARY KEY IDENTITY(1,1),
-  [hora_entrada] TIME,
-  [hora_salida] TIME,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE()
+-- -----------------------------------------------------------
+-- Maquinarium
+-- -----------------------------------------------------------
+CREATE TABLE Maquinarium (
+    IdMaquinaria        INT             NOT NULL IDENTITY(1,1),
+    IdProveedor         INT             NOT NULL,
+    IdTipoMaquinaria    INT             NOT NULL,
+    IdEstadoCalidad     INT             NOT NULL,
+    IdMarcaMaquinaria   INT             NOT NULL,
+    NombreMaquinaria    NVARCHAR(MAX)   NOT NULL,
+    CodigoInv           NVARCHAR(MAX)   NOT NULL,
+    Descripcion         NVARCHAR(MAX)   NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_Maquinarium PRIMARY KEY (IdMaquinaria),
+    CONSTRAINT FK_Maquinarium_Proveedor      FOREIGN KEY (IdProveedor)       REFERENCES Provedore (IdProveedor),
+    CONSTRAINT FK_Maquinarium_TipoMaquinaria FOREIGN KEY (IdTipoMaquinaria)  REFERENCES SubDominio (IdSubDominio),
+    CONSTRAINT FK_Maquinarium_EstadoCalidad  FOREIGN KEY (IdEstadoCalidad)   REFERENCES EstadoCalidad (IdEstadoCalidad),
+    CONSTRAINT FK_Maquinarium_Marca          FOREIGN KEY (IdMarcaMaquinaria) REFERENCES MarcaMaquinarium (IdMarcaMaquinaria)
 );
 
-CREATE TABLE [Servicio] (
-  [id_servicio] INT PRIMARY KEY IDENTITY(1,1),
-  [id_cliente] INT,
-  [id_direccion] INT,
-  [tipo_servicio] INT,
-  [fecha_inicio] DATE,
-  [fecha_final] DATE,
-  [costo] DECIMAL(10,2),
-  [descripcion] NVARCHAR(300),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Servicio_tipo_servicio]
-    FOREIGN KEY ([tipo_servicio])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Servicio_id_direccion]
-    FOREIGN KEY ([id_direccion])
-      REFERENCES [Direccion]([id_direccion]),
-  CONSTRAINT [FK_Servicio_id_cliente]
-    FOREIGN KEY ([id_cliente])
-      REFERENCES [Cliente]([id_cliente])
+-- -----------------------------------------------------------
+-- AsignacionMaquinarium
+-- -----------------------------------------------------------
+CREATE TABLE AsignacionMaquinarium (
+    IdServicio      INT             NOT NULL,
+    IdMaquinaria    INT             NOT NULL,
+    Cantidad        INT             NOT NULL,
+    Descripcion     NVARCHAR(MAX)   NULL,
+    CONSTRAINT PK_AsignacionMaquinarium PRIMARY KEY (IdServicio, IdMaquinaria),
+    CONSTRAINT FK_AsignacionMaquinarium_Servicio   FOREIGN KEY (IdServicio)   REFERENCES Servicio (IdServicio),
+    CONSTRAINT FK_AsignacionMaquinarium_Maquinaria FOREIGN KEY (IdMaquinaria) REFERENCES Maquinarium (IdMaquinaria)
 );
 
-CREATE TABLE [Asignacion_empleados] (
-  [id_usuario] INT,
-  [id_servicio] INT,
-  [id_horario] INT,
-  [dias_lavorales] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  PRIMARY KEY ([id_usuario], [id_servicio]),
-  CONSTRAINT [FK_Asignacion_empleados_id_usuario]
-    FOREIGN KEY ([id_usuario])
-      REFERENCES [Usuario_trabajador]([id_usuario]),
-  CONSTRAINT [FK_Asignacion_empleados_id_horario]
-    FOREIGN KEY ([id_horario])
-      REFERENCES [Horario]([id_horario]),
-  CONSTRAINT [FK_Asignacion_empleados_id_servicio]
-    FOREIGN KEY ([id_servicio])
-      REFERENCES [Servicio]([id_servicio]),
-  CONSTRAINT [FK_Asignacion_empleados_dias_lavorales]
-    FOREIGN KEY ([dias_lavorales])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- HistorialEstadoMaquina
+-- -----------------------------------------------------------
+CREATE TABLE HistorialEstadoMaquina (
+    IdHistorial         INT             NOT NULL IDENTITY(1,1),
+    IdMaquinaria        INT             NOT NULL,
+    IdEstadoCalidad     INT             NOT NULL,
+    FechaCambio         DATETIME2       NOT NULL,
+    Descripcion         NVARCHAR(MAX)   NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_HistorialEstadoMaquina PRIMARY KEY (IdHistorial),
+    CONSTRAINT FK_HistorialEstadoMaquina_Maquinaria    FOREIGN KEY (IdMaquinaria)    REFERENCES Maquinarium (IdMaquinaria),
+    CONSTRAINT FK_HistorialEstadoMaquina_EstadoCalidad FOREIGN KEY (IdEstadoCalidad) REFERENCES EstadoCalidad (IdEstadoCalidad)
 );
 
-CREATE TABLE [Incidentes] (
-  [id_incidente] INT PRIMARY KEY IDENTITY(1,1),
-  [id_servicio] INT,
-  [descripcion] NVARCHAR(300),
-  [fecha] DATE,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Incidentes_id_servicio]
-    FOREIGN KEY ([id_servicio])
-      REFERENCES [Servicio]([id_servicio])
+-- -----------------------------------------------------------
+-- Mantenimiento
+-- -----------------------------------------------------------
+CREATE TABLE Mantenimiento (
+    IdMantenimiento     INT             NOT NULL IDENTITY(1,1),
+    FechaMantenimiento  DATE            NOT NULL,
+    Descripcion         NVARCHAR(MAX)   NULL,
+    Costo               DECIMAL(18,2)   NOT NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_Mantenimiento PRIMARY KEY (IdMantenimiento)
 );
 
-CREATE TABLE [Marca_maquinaria] (
-  [id_marca_maquinaria] INT PRIMARY KEY IDENTITY(1,1),
-  [id_pais] INT,
-  [nombre_marca] NVARCHAR(100),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Marca_maquinaria_id_pais]
-    FOREIGN KEY ([id_pais])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- MantenimientosMaquinarium
+-- -----------------------------------------------------------
+CREATE TABLE MantenimientosMaquinarium (
+    IdMaquinaria    INT         NOT NULL,
+    IdMantenimiento INT         NOT NULL,
+    CreateAt        DATETIME2   NOT NULL,
+    UpdateAt        DATETIME2   NOT NULL,
+    CONSTRAINT PK_MantenimientosMaquinarium PRIMARY KEY (IdMaquinaria, IdMantenimiento),
+    CONSTRAINT FK_MantenimientosMaquinarium_Maquinaria    FOREIGN KEY (IdMaquinaria)    REFERENCES Maquinarium (IdMaquinaria),
+    CONSTRAINT FK_MantenimientosMaquinarium_Mantenimiento FOREIGN KEY (IdMantenimiento) REFERENCES Mantenimiento (IdMantenimiento)
 );
 
-CREATE TABLE [Maquinaria] (
-  [id_maquinaria] INT PRIMARY KEY IDENTITY(1,1),
-  [nombre_maquinaria] NVARCHAR(100),
-  [codigo_inv] NVARCHAR(50),
-  [id_provedor] INT,
-  [tipo_maquinaria] INT,
-  [id_estado_calidad] INT,
-  [id_marca_maquinaria] INT,
-  [descripcion] NVARCHAR(300),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Maquinaria_id_provedor]
-    FOREIGN KEY ([id_provedor])
-      REFERENCES [Provedores]([id_provedor]),
-  CONSTRAINT [FK_Maquinaria_id_marca_maquinaria]
-    FOREIGN KEY ([id_marca_maquinaria])
-      REFERENCES [Marca_maquinaria]([id_marca_maquinaria]),
-  CONSTRAINT [FK_Maquinaria_id_estado_calidad]
-    FOREIGN KEY ([id_estado_calidad])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Maquinaria_tipo_maquinaria]
-    FOREIGN KEY ([tipo_maquinaria])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- Recurso
+-- -----------------------------------------------------------
+CREATE TABLE Recurso (
+    IdRecurso   INT             NOT NULL IDENTITY(1,1),
+    IdProveedor INT             NOT NULL,
+    IdTipo      INT             NOT NULL,
+    Nombre      NVARCHAR(MAX)   NOT NULL,
+    Descripcion NVARCHAR(MAX)   NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Recurso PRIMARY KEY (IdRecurso),
+    CONSTRAINT FK_Recurso_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Provedore (IdProveedor),
+    CONSTRAINT FK_Recurso_Tipo      FOREIGN KEY (IdTipo)      REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Mantenimiento] (
-  [id_mantenimiento] INT PRIMARY KEY IDENTITY(1,1),
-  [fecha_mantenimiento] DATE,
-  [descripcion] NVARCHAR(300),
-  [costo] DECIMAL(10,2),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE()
+-- -----------------------------------------------------------
+-- AsignacionRecurso
+-- -----------------------------------------------------------
+CREATE TABLE AsignacionRecurso (
+    IdServicio  INT NOT NULL,
+    IdRecurso   INT NOT NULL,
+    Cantidad    INT NOT NULL,
+    CONSTRAINT PK_AsignacionRecurso PRIMARY KEY (IdServicio, IdRecurso),
+    CONSTRAINT FK_AsignacionRecurso_Servicio FOREIGN KEY (IdServicio) REFERENCES Servicio (IdServicio),
+    CONSTRAINT FK_AsignacionRecurso_Recurso  FOREIGN KEY (IdRecurso)  REFERENCES Recurso (IdRecurso)
 );
 
-CREATE TABLE [Mantenimientos_maquinaria] (
-  [id_maquinaria] INT,
-  [id_mantenimiento] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  PRIMARY KEY ([id_maquinaria], [id_mantenimiento]),
-  CONSTRAINT [FK_Mantenimientos_maquinaria_id_maquinaria]
-    FOREIGN KEY ([id_maquinaria])
-      REFERENCES [Maquinaria]([id_maquinaria]),
-  CONSTRAINT [FK_Mantenimientos_maquinaria_id_mantenimiento]
-    FOREIGN KEY ([id_mantenimiento])
-      REFERENCES [Mantenimiento]([id_mantenimiento])
+-- -----------------------------------------------------------
+-- Incidente
+-- -----------------------------------------------------------
+CREATE TABLE Incidente (
+    IdIncidente INT             NOT NULL IDENTITY(1,1),
+    IdServicio  INT             NOT NULL,
+    Descripcion NVARCHAR(MAX)   NOT NULL,
+    Fecha       DATE            NOT NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Incidente PRIMARY KEY (IdIncidente),
+    CONSTRAINT FK_Incidente_Servicio FOREIGN KEY (IdServicio) REFERENCES Servicio (IdServicio)
 );
 
-CREATE TABLE [Telefono_provedor] (
-  [id_telefono] INT PRIMARY KEY IDENTITY(1,1),
-  [telefono] INT,
-  [id_detalle] INT,
-  [id_provedor] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Telefono_provedor_id_detalle]
-    FOREIGN KEY ([id_detalle])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Telefono_provedor_id_provedor]
-    FOREIGN KEY ([id_provedor])
-      REFERENCES [Provedores]([id_provedor])
+-- -----------------------------------------------------------
+-- ServicioTerminado
+-- -----------------------------------------------------------
+CREATE TABLE ServicioTerminado (
+    IdServicioTerminado INT             NOT NULL IDENTITY(1,1),
+    IdServicio          INT             NOT NULL,
+    Satisfaccion        INT             NOT NULL,
+    Comentarios         NVARCHAR(MAX)   NULL,
+    CreateAt            DATETIME2       NOT NULL,
+    UpdateAt            DATETIME2       NOT NULL,
+    CONSTRAINT PK_ServicioTerminado PRIMARY KEY (IdServicioTerminado),
+    CONSTRAINT FK_ServicioTerminado_Servicio     FOREIGN KEY (IdServicio)   REFERENCES Servicio (IdServicio),
+    CONSTRAINT FK_ServicioTerminado_Satisfaccion FOREIGN KEY (Satisfaccion) REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Servicio_terminado] (
-  [Id_servicio_terminado] INT PRIMARY KEY IDENTITY(1,1),
-  [id_servicio] INT,
-  [satisfaccion] INT,
-  [comentarios] NVARCHAR(300),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Servicio_terminado_id_servicio]
-    FOREIGN KEY ([id_servicio])
-      REFERENCES [Servicio]([id_servicio]),
-  CONSTRAINT [FK_Servicio_terminado_satisfaccion]
-    FOREIGN KEY ([satisfaccion])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- TelefonoCliente
+-- -----------------------------------------------------------
+CREATE TABLE TelefonoCliente (
+    IdTelefono  INT         NOT NULL IDENTITY(1,1),
+    Telefono    INT         NOT NULL,
+    IdDetalle   INT         NOT NULL,
+    IdCliente   INT         NOT NULL,
+    CreateAt    DATETIME2   NOT NULL,
+    UpdateAt    DATETIME2   NOT NULL,
+    CONSTRAINT PK_TelefonoCliente PRIMARY KEY (IdTelefono),
+    CONSTRAINT FK_TelefonoCliente_Cliente  FOREIGN KEY (IdCliente)  REFERENCES Cliente (IdCliente),
+    CONSTRAINT FK_TelefonoCliente_Detalle  FOREIGN KEY (IdDetalle)  REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Asignacion_maquinaria] (
-  [id_servicio] INT,
-  [id_maquinaria] INT,
-  [Cantidad] INT,
-  [Descripcion] NVARCHAR(300),
-  PRIMARY KEY ([id_servicio], [id_maquinaria]),
-  CONSTRAINT [FK_Asignacion_maquinaria_id_maquinaria]
-    FOREIGN KEY ([id_maquinaria])
-      REFERENCES [Maquinaria]([id_maquinaria]),
-  CONSTRAINT [FK_Asignacion_maquinaria_id_servicio]
-    FOREIGN KEY ([id_servicio])
-      REFERENCES [Servicio]([id_servicio])
+-- -----------------------------------------------------------
+-- TelefonoProveedor
+-- -----------------------------------------------------------
+CREATE TABLE TelefonoProveedor (
+    IdTelefono  INT         NOT NULL IDENTITY(1,1),
+    Telefono    INT         NOT NULL,
+    IdDetalle   INT         NOT NULL,
+    IdProveedor INT         NOT NULL,
+    CreateAt    DATETIME2   NOT NULL,
+    UpdateAt    DATETIME2   NOT NULL,
+    CONSTRAINT PK_TelefonoProveedor PRIMARY KEY (IdTelefono),
+    CONSTRAINT FK_TelefonoProveedor_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Provedore (IdProveedor),
+    CONSTRAINT FK_TelefonoProveedor_Detalle   FOREIGN KEY (IdDetalle)   REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Usuarios_capacitaciones] (
-  [id_usuario] INT,
-  [id_capacitacion] INT,
-  [estado] NVARCHAR(50),
-  PRIMARY KEY ([id_usuario], [id_capacitacion]),
-  CONSTRAINT [FK_Usuarios_capacitaciones_id_capacitacion]
-    FOREIGN KEY ([id_capacitacion])
-      REFERENCES [Capacitaciones]([id_capacitacion]),
-  CONSTRAINT [FK_Usuarios_capacitaciones_id_usuario]
-    FOREIGN KEY ([id_usuario])
-      REFERENCES [Usuario_trabajador]([id_usuario])
+-- -----------------------------------------------------------
+-- TelefonoUsuario
+-- -----------------------------------------------------------
+CREATE TABLE TelefonoUsuario (
+    IdTelefonoUsuario   INT         NOT NULL IDENTITY(1,1),
+    TelefonoUsuario1    INT         NOT NULL,
+    IdUsuario           INT         NOT NULL,
+    IdDetalle           INT         NOT NULL,
+    CreateAt            DATETIME2   NOT NULL,
+    UpdateAt            DATETIME2   NOT NULL,
+    CONSTRAINT PK_TelefonoUsuario PRIMARY KEY (IdTelefonoUsuario),
+    CONSTRAINT FK_TelefonoUsuario_Usuario  FOREIGN KEY (IdUsuario)  REFERENCES UsuarioTrabajador (IdUsuario),
+    CONSTRAINT FK_TelefonoUsuario_Detalle  FOREIGN KEY (IdDetalle)  REFERENCES SubDominio (IdSubDominio)
 );
 
-CREATE TABLE [Memorial] (
-  [id_memorial] INT PRIMARY KEY IDENTITY(1,1),
-  [id_empleado] INT,
-  [descripcion] NVARCHAR(MAX),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Memorial_id_empleado]
-    FOREIGN KEY ([id_empleado])
-      REFERENCES [Usuario_trabajador]([id_usuario])
+-- -----------------------------------------------------------
+-- Uniforme
+-- -----------------------------------------------------------
+CREATE TABLE Uniforme (
+    IdUniforme      INT             NOT NULL IDENTITY(1,1),
+    NombreUniforme  NVARCHAR(MAX)   NOT NULL,
+    Talla           INT             NOT NULL,
+    Descripcion     NVARCHAR(MAX)   NULL,
+    CreateAt        DATETIME2       NOT NULL,
+    UpdateAt        DATETIME2       NOT NULL,
+    CONSTRAINT PK_Uniforme PRIMARY KEY (IdUniforme)
 );
 
-CREATE TABLE [Historial_de_estado_de_maquina] (
-  [id_historial] INT PRIMARY KEY IDENTITY(1,1),
-  [id_maquinaria] INT,
-  [id_estado_calidad] INT,
-  [fecha_de_cambio] DATETIME2,
-  [descripcion] NVARCHAR(300),
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Historial_de_estado_de_maquina_id_estado_calidad]
-    FOREIGN KEY ([id_estado_calidad])
-      REFERENCES [Sub_dominios]([id_sub_dominios]),
-  CONSTRAINT [FK_Historial_de_estado_de_maquina_id_maquinaria]
-    FOREIGN KEY ([id_maquinaria])
-      REFERENCES [Maquinaria]([id_maquinaria])
+-- -----------------------------------------------------------
+-- AsignacionUniforme
+-- -----------------------------------------------------------
+CREATE TABLE AsignacionUniforme (
+    IdAsignacionUniforme    INT             NOT NULL IDENTITY(1,1),
+    IdUsuario               INT             NOT NULL,
+    IdUniforme              INT             NOT NULL,
+    FechaEntrega            DATE            NOT NULL,
+    FechaDevolucion         DATE            NULL,
+    Estado                  NVARCHAR(MAX)   NOT NULL,
+    CreateAt                DATETIME2       NOT NULL,
+    UpdateAt                DATETIME2       NOT NULL,
+    CONSTRAINT PK_AsignacionUniforme PRIMARY KEY (IdAsignacionUniforme),
+    CONSTRAINT FK_AsignacionUniforme_Usuario  FOREIGN KEY (IdUsuario)  REFERENCES UsuarioTrabajador (IdUsuario),
+    CONSTRAINT FK_AsignacionUniforme_Uniforme FOREIGN KEY (IdUniforme) REFERENCES Uniforme (IdUniforme)
 );
 
-CREATE TABLE [Telefono_usuarios] (
-  [id_telefono_usuario] INT PRIMARY KEY IDENTITY(1,1),
-  [telefono_usuario] INT,
-  [id_usuario] INT,
-  [id_detalle] INT,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Telefono_usuarios_id_usuario]
-    FOREIGN KEY ([id_usuario])
-      REFERENCES [Usuario_trabajador]([id_usuario]),
-  CONSTRAINT [FK_Telefono_usuarios_id_detalle]
-    FOREIGN KEY ([id_detalle])
-      REFERENCES [Sub_dominios]([id_sub_dominios])
+-- -----------------------------------------------------------
+-- DocumentosUsuario
+-- -----------------------------------------------------------
+CREATE TABLE DocumentosUsuario (
+    IdDocumento     INT             NOT NULL IDENTITY(1,1),
+    IdUsuario       INT             NOT NULL,
+    TipoDeDocumento NVARCHAR(MAX)   NOT NULL,
+    Archivo         NVARCHAR(MAX)   NOT NULL,
+    FechaSubida     DATE            NOT NULL,
+    CreateAt        DATETIME2       NOT NULL,
+    UpdateAt        DATETIME2       NOT NULL,
+    CONSTRAINT PK_DocumentosUsuario PRIMARY KEY (IdDocumento),
+    CONSTRAINT FK_DocumentosUsuario_Usuario FOREIGN KEY (IdUsuario) REFERENCES UsuarioTrabajador (IdUsuario)
 );
 
-CREATE TABLE [Documentos_usuarios] (
-  [id_documento] INT PRIMARY KEY IDENTITY(1,1),
-  [id_usuario] INT,
-  [tipo_de_documento] NVARCHAR(100),
-  [archivo] NVARCHAR(MAX),
-  [fecha_subida] DATE,
-  [create_at] DATETIME2 DEFAULT GETDATE(),
-  [update_at] DATETIME2 DEFAULT GETDATE(),
-  CONSTRAINT [FK_Documentos_usuarios_id_usuario]
-    FOREIGN KEY ([id_usuario])
-      REFERENCES [Usuario_trabajador]([id_usuario])
+-- -----------------------------------------------------------
+-- Memorial
+-- -----------------------------------------------------------
+CREATE TABLE Memorial (
+    IdMemorial  INT             NOT NULL IDENTITY(1,1),
+    IdEmpleado  INT             NOT NULL,
+    Descripcion NVARCHAR(MAX)   NOT NULL,
+    CreateAt    DATETIME2       NOT NULL,
+    UpdateAt    DATETIME2       NOT NULL,
+    CONSTRAINT PK_Memorial PRIMARY KEY (IdMemorial),
+    CONSTRAINT FK_Memorial_Empleado FOREIGN KEY (IdEmpleado) REFERENCES UsuarioTrabajador (IdUsuario)
 );
 
-CREATE TABLE [Asignacion_recursos] (
-  [id_servicio] INT,
-  [id_recurso] INT,
-  [cantidad] INT,
-  PRIMARY KEY ([id_servicio], [id_recurso]),
-  CONSTRAINT [FK_Asignacion_recursos_id_recurso]
-    FOREIGN KEY ([id_recurso])
-      REFERENCES [Recursos]([id_recurso]),
-  CONSTRAINT [FK_Asignacion_recursos_id_servicio]
-    FOREIGN KEY ([id_servicio])
-      REFERENCES [Servicio]([id_servicio])
+-- -----------------------------------------------------------
+-- Capacitacione
+-- -----------------------------------------------------------
+CREATE TABLE Capacitacione (
+    IdCapacitacion  INT             NOT NULL IDENTITY(1,1),
+    Nombre          NVARCHAR(MAX)   NOT NULL,
+    Descripcion     NVARCHAR(MAX)   NULL,
+    Fecha           DATE            NOT NULL,
+    CreateAt        DATETIME2       NOT NULL,
+    UpdateAt        DATETIME2       NOT NULL,
+    CONSTRAINT PK_Capacitacione PRIMARY KEY (IdCapacitacion)
+);
+
+-- -----------------------------------------------------------
+-- UsuariosCapacitacione
+-- -----------------------------------------------------------
+CREATE TABLE UsuariosCapacitacione (
+    IdUsuario       INT             NOT NULL,
+    IdCapacitacion  INT             NOT NULL,
+    Estado          NVARCHAR(MAX)   NOT NULL,
+    CONSTRAINT PK_UsuariosCapacitacione PRIMARY KEY (IdUsuario, IdCapacitacion),
+    CONSTRAINT FK_UsuariosCapacitacione_Usuario      FOREIGN KEY (IdUsuario)      REFERENCES UsuarioTrabajador (IdUsuario),
+    CONSTRAINT FK_UsuariosCapacitacione_Capacitacion FOREIGN KEY (IdCapacitacion) REFERENCES Capacitacione (IdCapacitacion)
 );

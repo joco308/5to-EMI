@@ -1,450 +1,491 @@
 -- ============================================================
--- SCRIPT: Datos de prueba (seed)
--- MOTOR:  SQL Server
--- ORDEN:  Respeta dependencias de FK (tablas padre primero)
--- MAX:    5 registros por tabla
+-- SEED DATA - SISTEMA SASL
+-- Orden: tablas sin FK primero, luego dependientes
+-- Las contrasenas hasheadas corresponden a: "Admin123!"
+-- Hash BCrypt generado externamente para pruebas
 -- ============================================================
 
--- ------------------------------------------------------------
--- 1. Dominios  (sin dependencias)
--- ------------------------------------------------------------
+-- ============================================================
+-- 1. DOMINIOS (tabla raiz del catalogo)
+-- ============================================================
 INSERT INTO Dominios (dominio) VALUES
-    ('Genero'),
-    ('Estado Civil'),
-    ('Pais'),
-    ('Grado Academico'),
-    ('Zona'),
-    ('Tipo Telefono'),
-    ('Tipo Empresa'),
-    ('Tipo Producto'),
-    ('Tipo Servicio'),
-    ('Tipo Maquinaria'),
-    ('Carrera'),
-    ('Dias Laborales'),
-    ('Satisfaccion');
--- IDs generados: 1-13
+('Roles'),           -- id 1
+('Paises'),          -- id 2
+('Zonas'),           -- id 3
+('Generos'),         -- id 4
+('Estado Civil'),    -- id 5
+('Grado Academico'), -- id 6
+('Tipo Telefono'),   -- id 7
+('Tipo Maquinaria'), -- id 8
+('Tipo Recurso'),    -- id 9
+('Tipo Servicio'),   -- id 10
+('Dias Laborales'),  -- id 11
+('Empresas'),        -- id 12
+('Satisfaccion'),    -- id 13
+('Tipo Producto'),   -- id 14
+('Carreras');        -- id 15
 
--- ------------------------------------------------------------
--- 2. Sub_dominios  (depende: Dominios)
--- ------------------------------------------------------------
--- Genero (id_dominio=1)
+-- ============================================================
+-- 2. SUB_DOMINIOS (catalogo central - todo pasa por aqui)
+-- ============================================================
+
+-- Paises (dominio 2)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (1, 'Masculino'),
-    (1, 'Femenino'),
-    (1, 'Otro');
--- IDs: 1,2,3
+(2, 'Bolivia'),        -- id 1
+(2, 'Argentina'),      -- id 2
+(2, 'Brasil'),         -- id 3
+(2, 'Alemania'),       -- id 4
+(2, 'Estados Unidos'); -- id 5
 
--- Estado Civil (id_dominio=2)
+-- Zonas (dominio 3)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (2, 'Soltero'),
-    (2, 'Casado');
--- IDs: 4,5
+(3, 'Zona Sur'),       -- id 6
+(3, 'Zona Norte'),     -- id 7
+(3, 'Zona Central'),   -- id 8
+(3, 'Zona Este'),      -- id 9
+(3, 'Zona Oeste');     -- id 10
 
--- Pais (id_dominio=3)
+-- Generos (dominio 4)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (3, 'Bolivia'),
-    (3, 'Argentina'),
-    (3, 'Peru'),
-    (3, 'Chile'),
-    (3, 'Brasil');
--- IDs: 6,7,8,9,10
+(4, 'Masculino'),      -- id 11
+(4, 'Femenino'),       -- id 12
+(4, 'Otro');           -- id 13
 
--- Grado Academico (id_dominio=4)
+-- Estado Civil (dominio 5)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (4, 'Bachiller'),
-    (4, 'Tecnico'),
-    (4, 'Licenciado'),
-    (4, 'Magister'),
-    (4, 'Doctor');
--- IDs: 11,12,13,14,15
+(5, 'Soltero'),        -- id 14
+(5, 'Casado'),         -- id 15
+(5, 'Divorciado'),     -- id 16
+(5, 'Viudo');          -- id 17
 
--- Zona (id_dominio=5)
+-- Grado Academico (dominio 6)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (5, 'Norte'),
-    (5, 'Sur'),
-    (5, 'Este'),
-    (5, 'Oeste'),
-    (5, 'Centro');
--- IDs: 16,17,18,19,20
+(6, 'Bachiller'),      -- id 18
+(6, 'Tecnico'),        -- id 19
+(6, 'Licenciatura'),   -- id 20
+(6, 'Maestria');       -- id 21
 
--- Tipo Telefono (id_dominio=6)
+-- Tipo Telefono (dominio 7)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (6, 'Celular'),
-    (6, 'Fijo'),
-    (6, 'WhatsApp');
--- IDs: 21,22,23
+(7, 'Celular'),        -- id 22
+(7, 'Fijo'),           -- id 23
+(7, 'Trabajo');        -- id 24
 
--- Tipo Empresa (id_dominio=7)
+-- Tipo Maquinaria (dominio 8)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (7, 'S.R.L.'),
-    (7, 'S.A.'),
-    (7, 'Unipersonal'),
-    (7, 'Cooperativa'),
-    (7, 'Asociacion');
--- IDs: 24,25,26,27,28
+(8, 'Limpieza Industrial'),  -- id 25
+(8, 'Fumigacion'),           -- id 26
+(8, 'Jardineria'),           -- id 27
+(8, 'Seguridad');            -- id 28
 
--- Tipo Producto (id_dominio=8)
+-- Tipo Recurso (dominio 9)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (8, 'Quimico'),
-    (8, 'Herramienta'),
-    (8, 'Equipo'),
-    (8, 'Insumo'),
-    (8, 'Consumible');
--- IDs: 29,30,31,32,33
+(9, 'Quimico'),        -- id 29
+(9, 'Herramienta'),    -- id 30
+(9, 'Equipo EPP');     -- id 31
 
--- Tipo Servicio (id_dominio=9)
+-- Tipo Servicio (dominio 10)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (9, 'Limpieza General'),
-    (9, 'Limpieza Industrial'),
-    (9, 'Limpieza de Vidrios'),
-    (9, 'Desinfeccion'),
-    (9, 'Fumigacion');
--- IDs: 34,35,36,37,38
+(10, 'Limpieza de Oficinas'),    -- id 32
+(10, 'Fumigacion Residencial'),  -- id 33
+(10, 'Mantenimiento de Areas'),  -- id 34
+(10, 'Limpieza Industrial');     -- id 35
 
--- Tipo Maquinaria (id_dominio=10)
+-- Dias Laborales (dominio 11)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (10, 'Aspiradora'),
-    (10, 'Lustradoras'),
-    (10, 'Hidrolavadora'),
-    (10, 'Pulidora'),
-    (10, 'Atomizador');
--- IDs: 39,40,41,42,43
+(11, 'Lunes a Viernes'),         -- id 36
+(11, 'Lunes a Sabado'),          -- id 37
+(11, 'Fines de Semana'),         -- id 38
+(11, 'Lunes, Miercoles, Viernes'); -- id 39
 
--- Carrera (id_dominio=11)
+-- Empresas (dominio 12)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (11, 'Administracion de Empresas'),
-    (11, 'Ingenieria Industrial'),
-    (11, 'Contaduria Publica'),
-    (11, 'Derecho'),
-    (11, 'Sistemas Informaticos');
--- IDs: 44,45,46,47,48
+(12, 'Banco Nacional'),          -- id 40
+(12, 'Hospital Central'),        -- id 41
+(12, 'Edificio Torre Sur'),      -- id 42
+(12, 'Fabrica Textil Norte'),    -- id 43
+(12, 'Municipalidad'),           -- id 44
+-- Empresas de proveedores
+(12, 'Quimicos del Sur S.A.'),   -- id 45
+(12, 'MaquiTech Bolivia'),       -- id 46
+(12, 'Distribuidora Nacional');  -- id 47
 
--- Dias Laborales (id_dominio=12)
+-- Satisfaccion (dominio 13)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (12, 'Lunes a Viernes'),
-    (12, 'Lunes a Sabado'),
-    (12, 'Fines de Semana'),
-    (12, 'Turno Rotativo'),
-    (12, 'Bajo Demanda');
--- IDs: 49,50,51,52,53
+(13, 'Muy satisfecho'),          -- id 48
+(13, 'Satisfecho'),              -- id 49
+(13, 'Neutral'),                 -- id 50
+(13, 'Insatisfecho');            -- id 51
 
--- Satisfaccion (id_dominio=13)
+-- Tipo Producto para proveedor (dominio 14)
 INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
-    (13, 'Muy satisfecho'),
-    (13, 'Satisfecho'),
-    (13, 'Neutral'),
-    (13, 'Insatisfecho'),
-    (13, 'Muy insatisfecho');
--- IDs: 54,55,56,57,58
+(14, 'Productos Quimicos'),      -- id 52
+(14, 'Maquinaria'),              -- id 53
+(14, 'Insumos Generales');       -- id 54
 
--- ------------------------------------------------------------
--- 3. Roles  (sin dependencias)
--- ------------------------------------------------------------
+-- Carreras (dominio 15)
+INSERT INTO Sub_dominios (id_dominio, detalle) VALUES
+(15, 'Ingenieria Industrial'),   -- id 55
+(15, 'Administracion'),          -- id 56
+(15, 'Quimica'),                 -- id 57
+(15, 'Electronica');             -- id 58
+
+-- ============================================================
+-- 3. ROLES
+-- ============================================================
 INSERT INTO Roles (nombre_rol, salario) VALUES
-    ('Supervisor',      5000),
-    ('Operario',        3000),
-    ('Administrativo',  4000),
-    ('Tecnico',         3500),
-    ('Gerente',         8000);
--- IDs: 1-5
+('Gerente',        8000),  -- id 1
+('Administrador',  6000),  -- id 2
+('Supervisor',     4500),  -- id 3
+('Operario',       3000),  -- id 4
+('Tecnico',        3500);  -- id 5
 
--- ------------------------------------------------------------
--- 4. Direccion  (depende: Sub_dominios zona 16-20)
--- ------------------------------------------------------------
-INSERT INTO Direccion (id_zona, calle, n_casa) VALUES
-    (16, 'Av. Montes',        101),
-    (17, 'Calle Murillo',     202),
-    (18, 'Av. Arce',          303),
-    (19, 'Calle Loayza',      404),
-    (20, 'Av. 6 de Agosto',   505);
--- IDs: 1-5
-
--- ------------------------------------------------------------
--- 5. Estado_calidad  (sin dependencias)
--- ------------------------------------------------------------
+-- ============================================================
+-- 4. ESTADO_CALIDAD
+-- ============================================================
 INSERT INTO Estado_calidad (estado_calidad) VALUES
-    ('Excelente'),
-    ('Bueno'),
-    ('Regular'),
-    ('Deteriorado'),
-    ('Fuera de servicio');
--- IDs: 1-5
+('Optimo'),          -- id 1
+('Bueno'),           -- id 2
+('Regular'),         -- id 3
+('En Mantenimiento'), -- id 4
+('Dado de Baja');    -- id 5
 
--- ------------------------------------------------------------
--- 6. Usuario_trabajador  (depende: Sub_dominios, Direccion, Roles)
--- ------------------------------------------------------------
-INSERT INTO Usuario_trabajador
-    (id_estado_civil, id_grado_academico, id_genero, id_direccion, id_rol, id_pais,
-     contrasena_hash, correo, ci, nombre_usuario, fecha_nacimiento)
+-- ============================================================
+-- 5. DIRECCIONES (para usuarios y clientes)
+-- ============================================================
+INSERT INTO Direccion (id_zona, calle, n_casa) VALUES
+(6,  'Av. Hernando Siles',     123),   -- id 1 (usuario gerente)
+(7,  'Calle Murillo',          456),   -- id 2
+(8,  'Av. Arce',               789),   -- id 3
+(9,  'Calle Potosi',           321),   -- id 4
+(10, 'Av. Montes',             654),   -- id 5
+(6,  'Calle Ingavi',           987),   -- id 6
+(7,  'Av. Villazón',           111),   -- id 7
+(8,  'Calle Comercio',         222),   -- id 8
+(9,  'Av. 6 de Agosto',        333),   -- id 9
+(10, 'Calle Linares',          444),   -- id 10
+-- Direcciones para clientes
+(6,  'Av. Mariscal Santa Cruz', 100),  -- id 11
+(7,  'Calle Sagarnaga',         200),  -- id 12
+(8,  'Av. del Ejercito',        300),  -- id 13
+(9,  'Calle Yanacocha',         400),  -- id 14
+-- Direcciones para servicios
+(6,  'Av. Camacho',             500),  -- id 15
+(7,  'Calle Loayza',            600),  -- id 16
+(8,  'Av. Busch',               700),  -- id 17
+(9,  'Calle Illampu',           800);  -- id 18
+
+-- ============================================================
+-- 6. USUARIOS TRABAJADORES
+-- Contrasena para todos: "Admin123!"
+-- Hash BCrypt (costo 10): $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy
+-- ============================================================
+INSERT INTO Usuario_trabajador 
+    (id_rol, id_estado_civil, id_grado_academico, id_genero, id_direccion, id_pais,
+     contrasena_hash, correo, ci, nombre_usuario, fecha_nacimiento, servicio_asignado, pediente_2fa)
 VALUES
-    (4, 13, 1, 1, 2, 6,  '$2b$10$KIX1aBcDeF', 'juan.quispe@empresa.bo',    12345678, 'Juan Quispe',    '1990-03-15'),
-    (5, 11, 2, 2, 1, 6,  '$2b$10$LMN2oPqRsT', 'maria.lima@empresa.bo',     23456789, 'Maria Lima',     '1988-07-22'),
-    (4, 12, 1, 3, 3, 7,  '$2b$10$UVW3xYzAbC', 'carlos.ramos@empresa.bo',   34567890, 'Carlos Ramos',   '1995-11-08'),
-    (5, 14, 2, 4, 4, 8,  '$2b$10$DeF4gHiJkL', 'ana.flores@empresa.bo',     45678901, 'Ana Flores',     '1992-01-30'),
-    (4, 15, 1, 5, 5, 6,  '$2b$10$MnO5pQrStU', 'pedro.vargas@empresa.bo',   56789012, 'Pedro Vargas',   '1985-09-12');
--- IDs: 1-5
+-- Gerente
+(1, 15, 20, 11, 1, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'gerente@sasl.com', 12345678, 'Carlos Mamani', '1980-03-15', 0, 0),
+-- Administrador
+(2, 14, 20, 12, 2, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'admin@sasl.com', 87654321, 'Maria Quispe', '1985-07-22', 0, 0),
+-- Supervisor
+(3, 14, 19, 11, 3, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'supervisor1@sasl.com', 11223344, 'Juan Flores', '1990-01-10', 0, 0),
+-- Operarios
+(4, 14, 18, 11, 4, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'operario1@sasl.com', 22334455, 'Pedro Condori', '1992-05-18', 0, 0),
+(4, 14, 18, 12, 5, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'operario2@sasl.com', 33445566, 'Ana Choque', '1994-11-30', 0, 0),
+(4, 16, 18, 11, 6, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'operario3@sasl.com', 44556677, 'Luis Huanca', '1991-08-05', 0, 0),
+(4, 14, 19, 11, 7, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'operario4@sasl.com', 55667788, 'Rosa Ticona', '1993-02-14', 0, 0),
+-- Tecnico
+(5, 15, 19, 11, 8, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'tecnico1@sasl.com', 66778899, 'Miguel Apaza', '1988-09-25', 0, 0),
+(5, 14, 20, 11, 9, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'tecnico2@sasl.com', 77889900, 'Diego Vargas', '1987-12-03', 0, 0),
+(3, 15, 20, 12, 10, 1,
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lHgy',
+ 'supervisor2@sasl.com', 99001122, 'Lucia Mendez', '1989-06-17', 0, 0);
 
--- ------------------------------------------------------------
--- 7. Provedores  (depende: Sub_dominios empresa 24-28, producto 29-33)
--- ------------------------------------------------------------
-INSERT INTO Provedores (id_empresa, id_producto, nit, nombre) VALUES
-    (24, 29, 100200300, 'CleanPro S.R.L.'),
-    (25, 30, 200300400, 'HerraMax S.A.'),
-    (26, 31, 300400500, 'TecnoEquip'),
-    (27, 32, 400500600, 'InsumosCoop'),
-    (28, 33, 500600700, 'ConsuPlus');
--- IDs: 1-5
+-- ============================================================
+-- 7. TELEFONOS USUARIOS
+-- ============================================================
+INSERT INTO Telefono_usuarios (telefono_usuario, id_usuario, id_detalle) VALUES
+(72345678, 1, 22),
+(71234567, 2, 22),
+(76543210, 3, 22),
+(79876543, 4, 22),
+(74567890, 5, 22),
+(73456789, 6, 22),
+(78901234, 7, 22),
+(75678901, 8, 22),
+(70123456, 9, 22),
+(77890123, 10, 22);
 
--- ------------------------------------------------------------
--- 8. Recursos  (depende: Provedores, Sub_dominios tipo-producto 29-33)
--- ------------------------------------------------------------
-INSERT INTO Recursos (id_proveedor, id_tipo, nombre, descripcion) VALUES
-    (1, 29, 'Desengrasante industrial',    'Limpiador multiusos para superficies duras'),
-    (2, 30, 'Escoba de cerdas suaves',     'Para limpieza de pisos delicados'),
-    (3, 31, 'Aspiradora industrial 50L',   'Capacidad 50 litros motor 2200W'),
-    (4, 32, 'Guantes de nitrilo talla M',  'Pack x 100 unidades'),
-    (5, 33, 'Bolsas de basura 200L',       'Rollo 25 unidades resistencia alta');
--- IDs: 1-5
-
--- ------------------------------------------------------------
--- 9. Uniformes  (sin dependencias)
--- ------------------------------------------------------------
+-- ============================================================
+-- 8. UNIFORMES
+-- ============================================================
 INSERT INTO Uniformes (nombre_uniforme, talla, descripcion) VALUES
-    ('Camisa polo azul',         38, 'Uniforme diario operario'),
-    ('Pantalon cargo gris',      32, 'Resistente con bolsillos laterales'),
-    ('Chaleco reflectante',      42, 'Uso en areas industriales'),
-    ('Botas de seguridad punta', 40, 'Puntera de acero certificada'),
-    ('Gorra con logo',           99, 'Talla unica ajustable');
--- IDs: 1-5
+('Overol Industrial Azul',   42, 'Overol resistente para trabajo pesado'),
+('Overol Industrial Azul',   44, 'Overol resistente para trabajo pesado'),
+('Overol Industrial Azul',   46, 'Overol resistente para trabajo pesado'),
+('Chaleco Reflectivo',       42, 'Chaleco de seguridad con franjas reflectivas'),
+('Chaleco Reflectivo',       44, 'Chaleco de seguridad con franjas reflectivas'),
+('Camiseta Institucional',   42, 'Camiseta con logo SASL'),
+('Camiseta Institucional',   44, 'Camiseta con logo SASL');
 
--- ------------------------------------------------------------
--- 10. Asignacion_uniformes  (depende: Usuario_trabajador, Uniformes)
--- ------------------------------------------------------------
-INSERT INTO Asignacion_uniformes (id_usuario, id_uniforme, fecha_entrega, fecha_devolucion, estado) VALUES
-    (1, 1, '2025-01-05', NULL,         'Activo'),
-    (2, 2, '2025-01-05', NULL,         'Activo'),
-    (3, 3, '2025-01-10', NULL,         'Activo'),
-    (4, 4, '2025-01-10', '2025-06-30', 'Devuelto'),
-    (5, 5, '2025-02-01', NULL,         'Activo');
+-- ============================================================
+-- 9. ASIGNACION DE UNIFORMES
+-- ============================================================
+INSERT INTO Asignacion_uniformes (id_usuario, id_uniforme, fecha_entrega, estado) VALUES
+(4, 1, '2025-01-10', 'Activo'),
+(5, 2, '2025-01-10', 'Activo'),
+(6, 3, '2025-01-10', 'Activo'),
+(7, 1, '2025-01-10', 'Activo'),
+(8, 4, '2025-01-10', 'Activo'),
+(9, 5, '2025-01-10', 'Activo'),
+(10, 6, '2025-02-01', 'Activo');
 
--- ------------------------------------------------------------
--- 11. Capacitaciones  (sin dependencias)
--- ------------------------------------------------------------
-INSERT INTO Capacitaciones (nombre, descripcion, fecha) VALUES
-    ('Seguridad e higiene laboral',       'Normas basicas de seguridad en el trabajo',         '2025-02-10'),
-    ('Manejo de productos quimicos',      'Uso seguro y almacenamiento de quimicos',           '2025-03-05'),
-    ('Atencion al cliente',               'Tecnicas de comunicacion y servicio',               '2025-03-20'),
-    ('Uso de maquinaria industrial',      'Operacion correcta de equipos de limpieza',         '2025-04-15'),
-    ('Primeros auxilios',                 'Procedimientos de emergencia y primeros auxilios',  '2025-05-08');
--- IDs: 1-5
+-- ============================================================
+-- 10. PROVEEDORES
+-- ============================================================
+INSERT INTO Provedores (id_empresa, id_producto, nit, nombre) VALUES
+(45, 52, 100200300, 'Quimicos del Sur S.A.'),  -- id 1
+(46, 53, 200300400, 'MaquiTech Bolivia'),       -- id 2
+(47, 54, 300400500, 'Distribuidora Nacional'); -- id 3
 
--- ------------------------------------------------------------
--- 12. Carreras_usuario  (depende: Sub_dominios carrera 44-48, Usuario_trabajador)
--- ------------------------------------------------------------
-INSERT INTO Carreras_usuario (id_carrera, id_usuario) VALUES
-    (44, 1),
-    (45, 2),
-    (46, 3),
-    (47, 4),
-    (48, 5);
+-- ============================================================
+-- 11. TELEFONOS PROVEEDORES
+-- ============================================================
+INSERT INTO Telefono_proveedor (telefono, id_proveedor, id_detalle) VALUES
+(22345678, 1, 23),
+(22456789, 2, 23),
+(22567890, 3, 23);
 
--- ------------------------------------------------------------
--- 13. Cliente  (depende: Sub_dominios empresa 24-28, Direccion)
--- ------------------------------------------------------------
-INSERT INTO Cliente (id_empresa, id_direccion, nombre_cliente, contacto_emergencia) VALUES
-    (24, 1, 'Banco Union S.A.',          '76543210'),
-    (25, 2, 'Hospital del Norte',        '78901234'),
-    (26, 3, 'Colegio San Ignacio',       '77654321'),
-    (27, 4, 'Plaza Shopping Center',     '76789012'),
-    (28, 5, 'Planta Metalurgica Oruro',  '75678901');
--- IDs: 1-5
-
--- ------------------------------------------------------------
--- 14. Telefono_cliente  (depende: Sub_dominios tipo-tel 21-23, Cliente)
--- ------------------------------------------------------------
-INSERT INTO Telefono_cliente (telefono, id_detalle, id_cliente) VALUES
-    (22001100, 21, 1),
-    (22002200, 22, 2),
-    (76300300, 21, 3),
-    (22004400, 22, 4),
-    (76500500, 21, 5);
-
--- ------------------------------------------------------------
--- 15. Horario  (sin dependencias)
--- ------------------------------------------------------------
-INSERT INTO Horario (hora_entrada, hora_salida) VALUES
-    ('07:00', '15:00'),
-    ('08:00', '16:00'),
-    ('15:00', '23:00'),
-    ('22:00', '06:00'),
-    ('06:00', '14:00');
--- IDs: 1-5
-
--- ------------------------------------------------------------
--- 16. Servicio  (depende: Cliente, Direccion, Sub_dominios tipo-servicio 34-38)
--- ------------------------------------------------------------
-INSERT INTO Servicio (id_cliente, id_direccion, tipo_servicio, fecha_inicio, fecha_final, costo, descripcion) VALUES
-    (1, 1, 34, '2025-01-15', '2025-12-31', 15000.00, 'Limpieza general mensual oficinas Banco Union'),
-    (2, 2, 37, '2025-02-01', '2025-07-31',  8500.00, 'Desinfeccion semanal areas hospitalarias'),
-    (3, 3, 36, '2025-03-01', '2025-05-31',  3200.00, 'Limpieza de vidrios exterior edificio colegio'),
-    (4, 4, 34, '2025-03-15', NULL,          12000.00, 'Limpieza diaria areas comunes shopping'),
-    (5, 5, 35, '2025-04-01', '2025-09-30',  20000.00, 'Limpieza industrial planta de produccion');
--- IDs: 1-5
-
--- ------------------------------------------------------------
--- 17. Asignacion_empleados  (depende: Usuario_trabajador, Servicio, Horario, Sub_dominios dias 49-53)
--- ------------------------------------------------------------
-INSERT INTO Asignacion_empleados (id_usuario, id_servicio, id_horario, dias_laborales) VALUES
-    (1, 1, 1, 49),
-    (2, 2, 2, 50),
-    (3, 3, 3, 51),
-    (4, 4, 4, 52),
-    (5, 5, 5, 53);
-
--- ------------------------------------------------------------
--- 18. Incidentes  (depende: Servicio)
--- ------------------------------------------------------------
-INSERT INTO Incidentes (id_servicio, descripcion, fecha) VALUES
-    (1, 'Derrame de liquido en piso 3, area de cajas',           '2025-02-10'),
-    (2, 'Falta de insumos de desinfeccion en bodega central',    '2025-02-20'),
-    (3, 'Rotura accidental de vidrio en fachada sur',            '2025-03-12'),
-    (4, 'Operario reporta malestar por vapores quimicos',        '2025-04-05'),
-    (5, 'Falla en hidrolavadora durante turno nocturno',         '2025-04-18');
-
--- ------------------------------------------------------------
--- 19. Marca_maquinaria  (depende: Sub_dominios pais 6-10)
--- ------------------------------------------------------------
+-- ============================================================
+-- 12. MARCA MAQUINARIA
+-- ============================================================
 INSERT INTO Marca_maquinaria (id_pais, nombre_marca) VALUES
-    (6,  'AquaClean Bolivia'),
-    (7,  'IndusPro Argentina'),
-    (8,  'LimpiMax Peru'),
-    (9,  'TecnoClean Chile'),
-    (10, 'CleanBrasil');
--- IDs: 1-5
+(4, 'Karcher'),      -- id 1 (Alemania)
+(5, 'Tennant'),      -- id 2 (EEUU)
+(1, 'AgroBolivia'),  -- id 3 (Bolivia)
+(5, 'Husqvarna');    -- id 4 (EEUU)
 
--- ------------------------------------------------------------
--- 20. Maquinaria  (depende: Provedores, Sub_dominios tipo-maq 39-43, Estado_calidad, Marca_maquinaria)
--- ------------------------------------------------------------
-INSERT INTO Maquinaria
+-- ============================================================
+-- 13. MAQUINARIA
+-- ============================================================
+INSERT INTO Maquinaria 
     (id_proveedor, id_tipo_maquinaria, id_estado_calidad, id_marca_maquinaria,
      nombre_maquinaria, codigo_inv, descripcion)
 VALUES
-    (3, 39, 1, 3, 'Aspiradora industrial A1',    'MAQ-001', 'Motor 2200W capacidad 50L'),
-    (3, 40, 2, 1, 'Lustradora de pisos L2',      'MAQ-002', 'Disco 450mm velocidad variable'),
-    (3, 41, 1, 2, 'Hidrolavadora HP3000',        'MAQ-003', 'Presion 3000PSI motor electrico'),
-    (3, 42, 3, 4, 'Pulidora multiusos P4',       'MAQ-004', 'Para pisos de marmol y ceramica'),
-    (3, 43, 2, 5, 'Atomizador quimico AQ5',      'MAQ-005', 'Capacidad 20L para desinfeccion');
--- IDs: 1-5
+(2, 25, 1, 1, 'Aspiradora Industrial K5',    'MAQ-001', 'Aspiradora de alta potencia para superficies grandes'),
+(2, 25, 2, 1, 'Aspiradora Industrial K3',    'MAQ-002', 'Aspiradora para superficies medianas'),
+(2, 26, 1, 3, 'Fumigadora de Mochila 20L',   'MAQ-003', 'Equipo de fumigacion manual con tanque 20 litros'),
+(2, 26, 2, 3, 'Fumigadora Automatica',       'MAQ-004', 'Equipo automatico de fumigacion'),
+(2, 27, 1, 4, 'Cortadora de Cesped BX200',   'MAQ-005', 'Cortadora a gasolina para areas grandes'),
+(2, 25, 3, 2, 'Fregadora Automatica T300',   'MAQ-006', 'Fregadora automatica para pisos industriales');
 
--- ------------------------------------------------------------
--- 21. Mantenimiento  (sin dependencias)
--- ------------------------------------------------------------
+-- ============================================================
+-- 14. HISTORIAL ESTADO MAQUINA
+-- ============================================================
+INSERT INTO Historial_estado_maquina (id_maquinaria, id_estado_calidad, fecha_cambio, descripcion) VALUES
+(1, 1, '2025-01-05', 'Alta inicial, estado optimo'),
+(2, 1, '2025-01-05', 'Alta inicial, estado optimo'),
+(2, 2, '2025-03-10', 'Revision de filtros, estado bueno'),
+(3, 1, '2025-01-05', 'Alta inicial'),
+(6, 2, '2025-02-01', 'Alta con desgaste menor en rodillos'),
+(6, 3, '2025-04-15', 'Rodillos requieren cambio proximo');
+
+-- ============================================================
+-- 15. MANTENIMIENTO + MANTENIMIENTOS_MAQUINARIA
+-- ============================================================
 INSERT INTO Mantenimiento (fecha_mantenimiento, descripcion, costo) VALUES
-    ('2025-01-20', 'Cambio de filtros y revision general aspiradora',    350.00),
-    ('2025-02-15', 'Lubricacion y ajuste disco lustradora',              200.00),
-    ('2025-03-10', 'Reparacion bomba de presion hidrolavadora',          800.00),
-    ('2025-03-25', 'Reemplazo de escobillas pulidora',                   150.00),
-    ('2025-04-12', 'Limpieza valvulas y mantenimiento atomizador',       180.00);
--- IDs: 1-5
+('2025-03-10', 'Cambio de filtros y revision general aspiradora K3',    350.00),
+('2025-04-15', 'Lubricacion y ajuste de rodillos fregadora T300',       280.00),
+('2025-02-20', 'Revision de valvulas fumigadora automatica',             150.00);
 
--- ------------------------------------------------------------
--- 22. Mantenimientos_maquinaria  (depende: Maquinaria, Mantenimiento)
--- ------------------------------------------------------------
 INSERT INTO Mantenimientos_maquinaria (id_maquinaria, id_mantenimiento) VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5);
+(2, 1),
+(6, 2),
+(4, 3);
 
--- ------------------------------------------------------------
--- 23. Telefono_proveedor  (depende: Sub_dominios tipo-tel 21-23, Provedores)
--- ------------------------------------------------------------
-INSERT INTO Telefono_proveedor (telefono, id_detalle, id_proveedor) VALUES
-    (22100100, 22, 1),
-    (76200200, 21, 2),
-    (22300300, 22, 3),
-    (76400400, 21, 4),
-    (22500500, 22, 5);
+-- ============================================================
+-- 16. RECURSOS
+-- ============================================================
+INSERT INTO Recursos (id_proveedor, id_tipo, nombre, descripcion) VALUES
+(1, 29, 'Desengrasante Industrial 5L',  'Liquido desengrasante para superficies metalicas'),  -- id 1
+(1, 29, 'Desinfectante Multiusos 1L',   'Desinfectante para uso en hospitales y oficinas'),  -- id 2
+(1, 29, 'Insecticida Residual 1L',      'Insecticida de efecto prolongado para fumigacion'), -- id 3
+(3, 30, 'Escoba Industrial',            'Escoba de cerdas duras para interiores'),            -- id 4
+(3, 30, 'Trapeador Profesional',        'Trapeador con escurridor de aluminio'),              -- id 5
+(3, 31, 'Guantes de Nitrilo (par)',     'Guantes resistentes a quimicos talla M'),            -- id 6
+(3, 31, 'Mascarilla N95',               'Mascarilla de proteccion respiratoria');             -- id 7
 
--- ------------------------------------------------------------
--- 24. Servicio_terminado  (depende: Servicio, Sub_dominios satisfaccion 54-58)
--- ------------------------------------------------------------
-INSERT INTO Servicio_terminado (id_servicio, satisfaccion, comentarios) VALUES
-    (3, 54, 'Excelente trabajo, vidrios impecables'),
-    (2, 55, 'Buen servicio, puntualidad correcta'),
-    (1, 55, 'Conforme con el resultado general'),
-    (4, 56, 'Servicio aceptable, algunos detalles pendientes'),
-    (5, 54, 'Superaron las expectativas en la planta');
+-- ============================================================
+-- 17. CLIENTES
+-- ============================================================
+INSERT INTO Cliente (id_empresa, id_direccion, nombre_cliente, contacto_emergencia) VALUES
+(40, 11, 'Banco Nacional - Sucursal Central', '75123456'),  -- id 1
+(41, 12, 'Hospital Central La Paz',           '72987654'),  -- id 2
+(42, 13, 'Edificio Torre Sur - Admin',        '71456789'),  -- id 3
+(43, 14, 'Fabrica Textil del Norte',          '76789012');  -- id 4
 
--- ------------------------------------------------------------
--- 25. Asignacion_maquinaria  (depende: Servicio, Maquinaria)
--- ------------------------------------------------------------
-INSERT INTO Asignacion_maquinaria (id_servicio, id_maquinaria, cantidad, descripcion) VALUES
-    (1, 1, 2, 'Dos aspiradoras para pisos 1 y 2'),
-    (2, 5, 1, 'Atomizador para desinfeccion de salas'),
-    (3, 4, 1, 'Pulidora para acabado de pisos interiores'),
-    (4, 2, 3, 'Tres lustradoras para areas de alto trafico'),
-    (5, 3, 2, 'Dos hidrolavadoras para naves industriales');
+-- ============================================================
+-- 18. TELEFONOS CLIENTES
+-- ============================================================
+INSERT INTO Telefono_cliente (telefono, id_cliente, id_detalle) VALUES
+(22112233, 1, 23),
+(22334455, 2, 23),
+(22445566, 3, 23),
+(22556677, 4, 23);
 
--- ------------------------------------------------------------
--- 26. Usuarios_capacitaciones  (depende: Usuario_trabajador, Capacitaciones)
--- ------------------------------------------------------------
-INSERT INTO Usuarios_capacitaciones (id_usuario, id_capacitacion, estado) VALUES
-    (1, 1, 'Completado'),
-    (2, 2, 'Completado'),
-    (3, 3, 'En progreso'),
-    (4, 4, 'Completado'),
-    (5, 5, 'Pendiente');
-
--- ------------------------------------------------------------
--- 27. Memorial  (depende: Usuario_trabajador)
--- ------------------------------------------------------------
-INSERT INTO Memorial (id_empleado, descripcion) VALUES
-    (1, 'Reconocimiento por 5 anos de servicio sin ausencias injustificadas.'),
-    (2, 'Lider del mes en marzo 2025 por gestion de equipo destacada.'),
-    (3, 'Certificacion en manejo de quimicos peligrosos obtenida.'),
-    (4, 'Propuso mejora en protocolo de desinfeccion adoptada por la empresa.'),
-    (5, 'Gerente del trimestre Q1 2025 por crecimiento de cartera de clientes.');
-
--- ------------------------------------------------------------
--- 28. Historial_estado_maquina  (depende: Maquinaria, Estado_calidad)
--- ------------------------------------------------------------
-INSERT INTO Historial_estado_maquina
-    (id_maquinaria, id_estado_calidad, fecha_cambio, descripcion)
+-- ============================================================
+-- 19. SERVICIOS
+-- ============================================================
+INSERT INTO Servicio 
+    (id_cliente, id_direccion, tipo_servicio, fecha_inicio, fecha_final, costo, descripcion)
 VALUES
-    (1, 1, '2025-01-01', 'Alta en inventario estado inicial excelente'),
-    (2, 2, '2025-01-15', 'Leve desgaste en disco tras primer mes de uso'),
-    (3, 3, '2025-03-11', 'Falla en bomba detectada, pendiente reparacion'),
-    (3, 2, '2025-03-15', 'Reparacion completada, vuelve a estado bueno'),
-    (4, 3, '2025-04-01', 'Escobillas gastadas, uso intensivo en shopping');
+-- Servicio activo en banco (limpieza de oficinas)
+(1, 15, 32, '2025-04-01', '2025-06-30', 12000.00,
+ 'Limpieza diaria de oficinas, salas de espera y banos del edificio principal'),
+-- Servicio activo en hospital (limpieza industrial)
+(2, 16, 35, '2025-03-15', '2025-07-15', 25000.00,
+ 'Limpieza y desinfeccion de areas criticas, UCI y consultorios'),
+-- Servicio activo en edificio (mantenimiento de areas)
+(3, 17, 34, '2025-05-01', NULL,         8500.00,
+ 'Mantenimiento de areas comunes, jardines y estacionamiento'),
+-- Servicio terminado en fabrica (fumigacion)
+(4, 18, 33, '2025-02-01', '2025-02-05', 4500.00,
+ 'Fumigacion completa de planta de produccion y almacenes');
 
--- ------------------------------------------------------------
--- 29. Telefono_usuarios  (depende: Usuario_trabajador, Sub_dominios tipo-tel 21-23)
--- ------------------------------------------------------------
-INSERT INTO Telefono_usuarios (telefono_usuario, id_usuario, id_detalle) VALUES
-    (71111111, 1, 21),
-    (72222222, 2, 21),
-    (73333333, 3, 23),
-    (74444444, 4, 21),
-    (75555555, 5, 23);
+-- ============================================================
+-- 20. HORARIOS (para asignacion de empleados)
+-- ============================================================
+INSERT INTO Horario (hora_entrada, hora_salida) VALUES
+('07:00', '15:00'),  -- id 1 turno manana
+('15:00', '23:00'),  -- id 2 turno tarde
+('07:00', '12:00'),  -- id 3 medio dia
+('08:00', '16:00'),  -- id 4 jornada completa
+('06:00', '14:00');  -- id 5 madrugada
 
--- ------------------------------------------------------------
--- 30. Documentos_usuarios  (depende: Usuario_trabajador)
--- ------------------------------------------------------------
-INSERT INTO Documentos_usuarios (id_usuario, tipo_de_documento, archivo, fecha_subida) VALUES
-    (1, 'Carnet de identidad',      '/docs/usuarios/1/ci_scan.pdf',          '2025-01-03'),
-    (2, 'Titulo academico',         '/docs/usuarios/2/titulo_licenciado.pdf', '2025-01-04'),
-    (3, 'Contrato de trabajo',      '/docs/usuarios/3/contrato_2025.pdf',     '2025-01-05'),
-    (4, 'Certificado de salud',     '/docs/usuarios/4/salud_2025.pdf',        '2025-01-06'),
-    (5, 'Curriculum vitae',         '/docs/usuarios/5/cv_pedro.pdf',          '2025-01-07');
+-- ============================================================
+-- 21. ASIGNACION DE EMPLEADOS A SERVICIOS
+-- ============================================================
+INSERT INTO Asignacion_empleados (id_usuario, id_servicio, id_horario, dias_laborales) VALUES
+(4, 1, 1, 36),  -- Pedro Condori -> Banco, turno manana, lun-vie
+(5, 1, 1, 36),  -- Ana Choque    -> Banco, turno manana, lun-vie
+(6, 2, 4, 37),  -- Luis Huanca   -> Hospital, jornada completa, lun-sab
+(7, 2, 4, 37),  -- Rosa Ticona   -> Hospital, jornada completa, lun-sab
+(8, 3, 3, 39),  -- Miguel Apaza  -> Edificio, medio dia, lun-mie-vie
+(10,3, 3, 39);  -- Lucia Mendez  -> Edificio, medio dia, lun-mie-vie
 
--- ------------------------------------------------------------
--- 31. Asignacion_recursos  (depende: Servicio, Recursos)
--- ------------------------------------------------------------
+-- Actualizar ServicioAsignado = true para los empleados asignados
+UPDATE Usuario_trabajador SET servicio_asignado = 1 WHERE id_usuario IN (4, 5, 6, 7, 8, 10);
+
+-- ============================================================
+-- 22. ASIGNACION MAQUINARIA A SERVICIOS
+-- ============================================================
+INSERT INTO Asignacion_maquinaria (id_servicio, id_maquinaria, cantidad, descripcion) VALUES
+(1, 1, 1, 'Aspiradora para oficinas principales'),
+(1, 6, 1, 'Fregadora para pasillos y hall de entrada'),
+(2, 2, 2, 'Aspiradoras para diferentes pisos del hospital'),
+(2, 6, 1, 'Fregadora para pasillos generales'),
+(3, 5, 1, 'Cortadora para areas verdes del edificio'),
+(4, 3, 2, 'Fumigadoras para la planta y almacenes');
+
+-- ============================================================
+-- 23. ASIGNACION RECURSOS A SERVICIOS
+-- ============================================================
 INSERT INTO Asignacion_recursos (id_servicio, id_recurso, cantidad) VALUES
-    (1, 1, 10),
-    (2, 4, 50),
-    (3, 2, 5),
-    (4, 5, 20),
-    (5, 3,  2);
+(1, 1, 10), -- desengrasante al banco
+(1, 4, 5),  -- escobas al banco
+(1, 5, 5),  -- trapeadores al banco
+(2, 2, 20), -- desinfectante al hospital
+(2, 6, 30), -- guantes al hospital
+(2, 7, 30), -- mascarillas al hospital
+(3, 4, 3),  -- escobas al edificio
+(3, 5, 3),  -- trapeadores al edificio
+(4, 3, 10), -- insecticida a la fabrica
+(4, 7, 10); -- mascarillas a la fabrica
+
+-- ============================================================
+-- 24. SERVICIO TERMINADO (el de la fabrica ya concluyo)
+-- ============================================================
+INSERT INTO Servicio_terminado (id_servicio, satisfaccion, comentarios) VALUES
+(4, 48, 'Excelente trabajo, la fumigacion fue muy efectiva. Sin ninguna queja.');
+
+-- ============================================================
+-- 25. INCIDENTES
+-- ============================================================
+INSERT INTO Incidentes (id_servicio, descripcion, fecha) VALUES
+(2, 'Derrame menor de producto de limpieza en pasillo 3er piso. Atendido de inmediato.', '2025-04-10'),
+(1, 'Maquina aspiradora presento falla electrica. Se sustituyo por equipo de respaldo.',  '2025-04-22');
+
+-- ============================================================
+-- 26. CAPACITACIONES
+-- ============================================================
+INSERT INTO Capacitaciones (nombre, descripcion, fecha) VALUES
+('Manejo de Productos Quimicos',   'Uso seguro y almacenamiento de quimicos industriales',        '2025-02-15'),
+('Primeros Auxilios Basicos',      'Respuesta ante accidentes laborales',                         '2025-03-01'),
+('Uso de EPP',                     'Equipo de proteccion personal: tipos, uso correcto y cuidado', '2025-03-20'),
+('Protocolo de Fumigacion',        'Tecnicas y seguridad en procesos de fumigacion',               '2025-04-05');
+
+-- ============================================================
+-- 27. USUARIOS_CAPACITACIONES
+-- ============================================================
+INSERT INTO Usuarios_capacitaciones (id_usuario, id_capacitacion, estado) VALUES
+(4, 1, 'Completado'),
+(4, 3, 'Completado'),
+(5, 1, 'Completado'),
+(5, 3, 'Completado'),
+(6, 1, 'Completado'),
+(6, 2, 'Completado'),
+(6, 3, 'Completado'),
+(7, 3, 'En progreso'),
+(8, 4, 'Completado'),
+(9, 4, 'Completado'),
+(9, 1, 'Pendiente'),
+(10, 2, 'Completado');
+
+-- ============================================================
+-- 28. DOCUMENTOS USUARIOS
+-- ============================================================
+INSERT INTO Documentos_usuarios (id_usuario, tipo_de_documento, archivo, fecha_subida) VALUES
+(1, 'Carnet de Identidad',  'ci_carlos_mamani.pdf',    '2024-01-10'),
+(2, 'Carnet de Identidad',  'ci_maria_quispe.pdf',     '2024-01-10'),
+(4, 'Carnet de Identidad',  'ci_pedro_condori.pdf',    '2024-01-15'),
+(4, 'Certificado Medico',   'med_pedro_condori.pdf',   '2024-01-15'),
+(5, 'Carnet de Identidad',  'ci_ana_choque.pdf',       '2024-01-15'),
+(6, 'Carnet de Identidad',  'ci_luis_huanca.pdf',      '2024-01-20'),
+(8, 'Titulo Tecnico',       'titulo_miguel_apaza.pdf', '2024-01-20');
+
+-- ============================================================
+-- 29. MEMORIALES
+-- ============================================================
+INSERT INTO Memorial (id_empleado, descripcion) VALUES
+(4, 'Pedro Condori lleva 2 años en la empresa. Trabajador destacado del mes de marzo 2025.'),
+(8, 'Miguel Apaza capacito a 3 nuevos tecnicos en el uso de maquinaria industrial.');
+
+-- ============================================================
+-- 30. CARRERAS_USUARIO (relacion M:N usuario <-> subdominio carrera)
+-- ============================================================
+INSERT INTO Carreras_usuario (id_carrera, id_usuario) VALUES
+(55, 8),   -- Miguel Apaza - Ingenieria Industrial
+(55, 9),   -- Diego Vargas - Ingenieria Industrial
+(56, 2),   -- Maria Quispe - Administracion
+(56, 10),  -- Lucia Mendez - Administracion
+(57, 6),   -- Luis Huanca  - Quimica
+(58, 3);   -- Juan Flores  - Electronica
