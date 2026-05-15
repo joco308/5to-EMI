@@ -3,7 +3,7 @@ Paradigma de resolucion de problemas, elije la  mejor opcion local de cada paso 
 ## Cracteristicas
 
 - **Miope:** no considera consecuencias futuras
-- **Decendente:* reduce el problema en cada etapa
+- **Decendente:** reduce el problema en cada etapa
 - No considera deciciones pasadas
 
 ## Componentes
@@ -97,18 +97,19 @@ Utiliza una pila, entramos a raiz y ponemos en la pila sus hijos y asi buscamos 
 
 ## Busqueda con retroceso
 
-
+Es una busqueda que toma forma de una arbol de deciciones, en cada decicion ve si es la mejor en el caso de que no regresa una atras y vuelve a interntarlo con el otro 
 
 ## Busqueda en profundidad progresiva
 
-
+Es una busqueda muy eficionte en memoria ya que no guarna mas de lo necesario para recorer el grafo, en cada iteracion agrega profundidad y vuelve a revisar todo, a diferencia de busqueda por aplitud es que no guarnamos mucho en memoria solamente tenemos 1 varaible que nos indica la profundidad
 
 ## Busqueda en bidireccional en amplitud
-<investigar estos 3 y hacer un video>
+
+es una busqueda en aplitud que se hace por 2 caminos distintos el primero desde el inico la raiz y el otro desde el destino asi se redice el tiempo y mucho mas rapido
 
 # Grafos
 
-<investigar que es u grafo>
+Los grafos, compuestos por vértices y aristas, son estructuras esenciales en ciencias computacionales, existiendo en formas dirigidas y no dirigidas, cada una con propiedades y aplicaciones específicas.
 
 ## Tipos de grafos
 
@@ -128,7 +129,7 @@ y el grado del grafo es la sumatoria
 
 ### Cadena
 
-Que todos los verives esten conectados
+Que todos los vertices esten conectados
 
 ### Camino
 
@@ -144,29 +145,27 @@ todos los nodos se conectan y se cierra el ciclo
 
 ### Conexo
 
-<investigar>
+Un grafo conexto es un grafo que tiene todas sus aristas conectadas y un nodo puede llegar al otro si hay un par de nodos no conectados no e sun grafo conexo
 
 ## Caminos euclerianos y civlos auquerianos
 ### camino eugleriano
 
-Es aquel que rocore todo el grafo sin repetir una coneccion, esto se cumplira siempre y cunedo
-
-esto se cumplira siempre y cundo un grafo no tenga mas de 2 vertices con garado impar
+Es aquel que rocore todo el grafo sin repetir una coneccion, esto se cumplira siempre y cuando un grafo no tenga mas de 2 vertices con garado impar
 
 ### Civlo euleriano
 
-Es aquel siclo que recore todo el grafo sin repetir una coneccion este se cumplirra solo cuando todos losm vertices del grafo son grado par
+Es aquel siclo que recore todo el grafo sin repetir una coneccion este se cumplirra solo cuando todos los vertices del grafo son grado par
 
 ![grafo Eucleriano]("./src/grafo-eucleriano.png")
 
 ## Red
-Es un par (N,E) en un conjunto X, donde N es un conjunto no vacio de puntos de x, E es un subconjunto de aristas $NxN$, en el que no hay elemenos repetidos ni de la forma (ni, ni) A una res se le pueden asociar funciones capaces de dar valores espeficicos de cada una de las aristas
+Es un par (N,E) en un conjunto X, donde N es un conjunto no vacio de puntos de x, E es un subconjunto de aristas $NxN$, en el que no hay elemenos repetidos ni de la forma (ni, ni) A una red se le pueden asociar funciones capaces de dar valores espeficicos de cada una de las aristas
 
 ## Red no dirigida 
 
 Es una red coyo subconjunto de E esta formado por aristas no dirigidas
 
-## REd dirigida 
+## Red dirigida 
 
 Es una red cuyo subconjunto de aristas E esta formado por aristas dirigidas
 
