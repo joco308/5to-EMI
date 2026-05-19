@@ -24,7 +24,8 @@ INSERT INTO Dominio (Dominio1) VALUES
 ('Empresas'),         -- id 12
 ('Satisfaccion'),     -- id 13
 ('Tipo Producto'),    -- id 14
-('Carreras');         -- id 15
+('Carreras'),         -- id 15
+('Tipo Documento');   -- id 16
 
 -- ============================================================
 -- 2. SubDominio
@@ -129,6 +130,13 @@ INSERT INTO SubDominio (IdDominio, Detalle) VALUES
 (15, 'Administracion'),        -- id 56
 (15, 'Quimica'),               -- id 57
 (15, 'Electronica');           -- id 58
+
+-- Tipo documento (IdDominio = 16)
+INSERT INTO SubDominio (IdDominio, Detalle) VALUES
+(16, 'Fotocopia CI'),                               -- id 59
+(16, 'Certificado de Nacimiento'),                  -- id 60
+(16, 'Certificado de Antecedentes Policiales'),     -- id 61
+(16, 'Currículum Vitae');                           -- id 62
 
 -- ============================================================
 -- 3. Role
