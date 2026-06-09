@@ -417,14 +417,14 @@ CREATE TABLE AsignacionUniforme (
 CREATE TABLE DocumentosUsuario (
     IdDocumento      INT             NOT NULL IDENTITY(1,1),
     IdUsuario        INT             NOT NULL,
-    IdTipoDeDocumento  NVARCHAR(100)   NOT NULL,
+    IdTipoDeDocumento  INT  NOT NULL,
     NombreArchivo    NVARCHAR(100)   NOT NULL,
     FechaSubida      DATE            NOT NULL,
     UbicacionArchivo NVARCHAR(200)   NOt NULL,
     CreateAt         DATETIME2       NOT NULL DEFAULT SYSDATETIME(),
     UpdateAt         DATETIME2       NOT NULL DEFAULT SYSDATETIME(),
     CONSTRAINT PK_DocumentosUsuario PRIMARY KEY (IdDocumento),
-    CONSTRAINT FK_DocumentosUsuario_Usuario FOREIGN KEY (IdUsuario) REFERENCES UsuarioTrabajador (IdUsuario)
+    CONSTRAINT FK_DocumentosUsuario_Usuario FOREIGN KEY (IdUsuario) REFERENCES UsuarioTrabajador (IdUsuario),
     CONSTRAINT FK_DocumentosUsuario_Tipo FOREIGN KEY (IdTipoDeDocumento) REFERENCES SubDominio (IdSubDominio)
 );
 

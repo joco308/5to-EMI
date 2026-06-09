@@ -144,7 +144,7 @@ INSERT INTO SubDominio (IdDominio, Detalle) VALUES
 INSERT INTO Role (NombreRol, Salario) VALUES
 ('Gerente',       8000),  -- id 1
 ('Administrador', 6000),  -- id 2
-('Trabajador',    4500);  -- id 3
+('Trabajador',    4500),  -- id 3
 
 -- ============================================================
 -- 4. EstadoCalidad
